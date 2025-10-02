@@ -137,7 +137,69 @@
         .theme-toggle:hover {
             background: rgba(255,255,255,0.3);
         }
-        
+
+        /* 進度追蹤系統 */
+        .progress-container {
+            margin-top: 15px;
+            padding: 0 20px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 5px;
+            opacity: 0.9;
+        }
+
+        .progress-bar-bg {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #4ade80 0%, #22c55e 100%);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        }
+
+        .day-progress {
+            position: relative;
+        }
+
+        .day-progress-indicator {
+            position: absolute;
+            top: -5px;
+            right: 5px;
+            background: #22c55e;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .day-progress-indicator.complete {
+            background: #22c55e;
+        }
+
+        .day-progress-indicator.partial {
+            background: #f59e0b;
+        }
+
+        .day-progress-indicator.empty {
+            background: #6b7280;
+        }
+
         .nav-tabs {
             display: flex;
             background: var(--nav-bg);
@@ -353,20 +415,27 @@
             align-items: center;
             margin-bottom: 10px;
             padding: 10px;
-            background: white;
+            background: var(--info-bg);
             border-radius: 8px;
             transition: all 0.3s;
+            color: var(--text-color);
         }
-        
+
+        .checklist-item span {
+            color: var(--text-color);
+            font-size: 14px;
+        }
+
         .checklist-item:hover {
             transform: translateX(5px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px var(--shadow-color);
         }
-        
+
         .checkbox {
             width: 20px;
             height: 20px;
             margin-right: 10px;
+            cursor: pointer;
         }
         
         .restaurant-card {
@@ -737,6 +806,197 @@
         body.dark-mode span[style*="background"] {
             background: var(--highlight-bg) !important;
         }
+
+        /* 微互動動畫效果 */
+        @keyframes checkboxCelebration {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .checkbox:checked {
+            animation: checkboxCelebration 0.3s ease;
+        }
+
+        .checklist-item:has(.checkbox:checked) {
+            animation: slideInSuccess 0.3s ease;
+        }
+
+        @keyframes slideInSuccess {
+            0% { transform: translateX(0); background: var(--info-bg); }
+            50% { transform: translateX(5px); background: var(--success-bg); }
+            100% { transform: translateX(0); background: var(--info-bg); }
+        }
+
+        .day-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px var(--shadow-color);
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 16px var(--shadow-color);
+        }
+
+        button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .nav-tab {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-tab:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-tab:active {
+            transform: translateY(0);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .back-to-top {
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes progressGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(74, 222, 128, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(74, 222, 128, 0.8); }
+        }
+
+        .progress-bar-fill[style*="100%"] {
+            animation: progressGlow 1.5s ease-in-out infinite;
+        }
+
+        /* 載入動畫 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        /* 卡片3D效果 */
+        .day-card {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+
+        .day-card:hover {
+            transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-5px);
+        }
+
+        /* 快速跳轉選單 */
+        .quick-nav {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            z-index: 998;
+        }
+
+        .quick-nav-toggle {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quick-nav-toggle:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .quick-nav-menu {
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            background: var(--container-bg);
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 8px 24px var(--shadow-color);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            min-width: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .quick-nav-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .quick-nav-item {
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-color);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quick-nav-item:hover {
+            background: var(--highlight-bg);
+            transform: translateX(-5px);
+        }
+
+        .quick-nav-item.active {
+            background: var(--bg-gradient-start);
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -747,6 +1007,17 @@
             </button>
             <h1>🗾 北海道家庭之旅</h1>
             <div class="subtitle">2025.10.11 - 10.18｜4人同行</div>
+
+            <!-- 整體進度條 -->
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>整體進度</span>
+                    <span id="overall-progress-text">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="overall-progress-bar" style="width: 0%"></div>
+                </div>
+            </div>
         </div>
         
         <div class="nav-tabs">
@@ -3966,6 +4237,27 @@
         </div>
     </div>
 
+    <!-- 快速跳轉選單 -->
+    <div class="quick-nav">
+        <div class="quick-nav-menu" id="quickNavMenu">
+            <div class="quick-nav-item" onclick="showSection('prepare'); toggleQuickNav();">📋 行前準備</div>
+            <div class="quick-nav-item" onclick="showSection('transport'); toggleQuickNav();">🚃 交通指南</div>
+            <div class="quick-nav-item" onclick="showSection('day1'); toggleQuickNav();">📅 Day 1</div>
+            <div class="quick-nav-item" onclick="showSection('day2'); toggleQuickNav();">📅 Day 2</div>
+            <div class="quick-nav-item" onclick="showSection('day3'); toggleQuickNav();">📅 Day 3</div>
+            <div class="quick-nav-item" onclick="showSection('day4'); toggleQuickNav();">📅 Day 4</div>
+            <div class="quick-nav-item" onclick="showSection('day5'); toggleQuickNav();">📅 Day 5</div>
+            <div class="quick-nav-item" onclick="showSection('day6'); toggleQuickNav();">📅 Day 6</div>
+            <div class="quick-nav-item" onclick="showSection('day7'); toggleQuickNav();">📅 Day 7</div>
+            <div class="quick-nav-item" onclick="showSection('day8'); toggleQuickNav();">📅 Day 8</div>
+            <div class="quick-nav-item" onclick="showSection('restaurants'); toggleQuickNav();">🍜 美食推薦</div>
+            <div class="quick-nav-item" onclick="showSection('emergency'); toggleQuickNav();">🆘 緊急聯絡</div>
+        </div>
+        <button class="quick-nav-toggle" onclick="toggleQuickNav()" aria-label="快速跳轉">
+            ☰
+        </button>
+    </div>
+
     <!-- 返回頂部按鈕 -->
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="返回頂部">
         ↑
@@ -4001,6 +4293,9 @@
                 states[index] = checkbox.checked;
             });
             localStorage.setItem('hokkaidoChecklist', JSON.stringify(states));
+
+            // 更新進度條
+            updateProgress();
         }
 
         function loadCheckboxState() {
@@ -4059,6 +4354,46 @@
             }
         }
 
+        // 快速跳轉選單
+        function toggleQuickNav() {
+            const menu = document.getElementById('quickNavMenu');
+            menu.classList.toggle('show');
+        }
+
+        // 點擊外部關閉選單
+        document.addEventListener('click', function(event) {
+            const quickNav = document.querySelector('.quick-nav');
+            const menu = document.getElementById('quickNavMenu');
+
+            if (quickNav && !quickNav.contains(event.target)) {
+                menu.classList.remove('show');
+            }
+        });
+
+        // 進度追蹤系統
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.checkbox');
+            const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const totalCount = checkboxes.length;
+            const percentage = totalCount > 0 ? Math.round((checkedCount / totalCount) * 100) : 0;
+
+            // 更新整體進度條
+            const progressBar = document.getElementById('overall-progress-bar');
+            const progressText = document.getElementById('overall-progress-text');
+
+            if (progressBar && progressText) {
+                progressBar.style.width = percentage + '%';
+                progressText.textContent = percentage + '%';
+            }
+
+            // 添加完成動畫效果
+            if (percentage === 100) {
+                progressBar.style.boxShadow = '0 0 20px rgba(74, 222, 128, 0.8)';
+            } else {
+                progressBar.style.boxShadow = '0 0 10px rgba(74, 222, 128, 0.5)';
+            }
+        }
+
         // 頁面載入時執行
         document.addEventListener('DOMContentLoaded', function() {
             // 載入主題設定
@@ -4075,6 +4410,9 @@
 
             // 監聽滾動事件來控制返回頂部按鈕
             window.addEventListener('scroll', toggleBackToTop);
+
+            // 初始化進度條
+            updateProgress();
         });
     </script>
 </body>
