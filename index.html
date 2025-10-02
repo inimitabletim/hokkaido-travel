@@ -3,57 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>北海道家庭旅遊指南</title>
+    <meta name="description" content="2025年10月北海道8天7夜家庭旅遊完整指南，包含札幌、小樽、函館等景點推薦、交通攻略、美食餐廳及行前準備清單。">
+    <meta name="keywords" content="北海道旅遊,北海道自由行,札幌旅遊,小樽旅遊,函館旅遊,北海道美食,日本旅遊,家庭旅遊">
+    <meta name="author" content="北海道家庭旅遊指南">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="北海道家庭旅遊指南 | 2025.10.11-10.18">
+    <meta property="og:description" content="8天7夜北海道家庭旅遊完整攻略，涵蓋札幌、小樽、函館等熱門景點、交通指南、美食推薦及行前準備。">
+    <meta property="og:site_name" content="北海道家庭旅遊指南">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="北海道家庭旅遊指南 | 2025.10.11-10.18">
+    <meta name="twitter:description" content="8天7夜北海道家庭旅遊完整攻略，涵蓋札幌、小樽、函館等熱門景點、交通指南、美食推薦及行前準備。">
+
+    <title>北海道家庭旅遊指南 | 2025.10.11-10.18 | 8天7夜完整攻略</title>
     <style>
+        :root {
+            --bg-gradient-start: #667eea;
+            --bg-gradient-end: #764ba2;
+            --container-bg: white;
+            --text-color: #333;
+            --card-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --nav-bg: #f8f9fa;
+            --nav-border: #e9ecef;
+            --tip-bg: #fff3cd;
+            --tip-border: #ffc107;
+            --shadow-color: rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode {
+            --bg-gradient-start: #1a1a2e;
+            --bg-gradient-end: #16213e;
+            --container-bg: #0f3460;
+            --text-color: #e8e8e8;
+            --card-bg: linear-gradient(135deg, #1e2a3a 0%, #243447 100%);
+            --nav-bg: #1a2332;
+            --nav-border: #2a3f5f;
+            --tip-bg: #3d4e26;
+            --tip-border: #6b8e23;
+            --shadow-color: rgba(0,0,0,0.5);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
             padding: 10px;
+            transition: background 0.3s ease, color 0.3s ease;
         }
         
         .container {
             max-width: 480px;
             margin: 0 auto;
-            background: white;
+            background: var(--container-bg);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transition: background 0.3s ease;
         }
         
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
             color: white;
             padding: 30px 20px;
             text-align: center;
+            position: relative;
         }
-        
+
         .header h1 {
             font-size: 24px;
             margin-bottom: 10px;
         }
-        
+
         .header .subtitle {
             font-size: 14px;
             opacity: 0.9;
         }
+
+        .theme-toggle {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.3);
+        }
         
         .nav-tabs {
             display: flex;
-            background: #f8f9fa;
-            border-bottom: 2px solid #e9ecef;
+            background: var(--nav-bg);
+            border-bottom: 2px solid var(--nav-border);
             position: sticky;
             top: 0;
             z-index: 100;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
+            transition: background 0.3s ease;
         }
         
         .nav-tab {
@@ -96,10 +162,11 @@
         }
         
         .day-card {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
+            transition: background 0.3s ease;
         }
         
         .day-header {
@@ -222,11 +289,12 @@
         }
         
         .tip-box {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
+            background: var(--tip-bg);
+            border-left: 4px solid var(--tip-border);
             padding: 15px;
             margin: 15px 0;
             border-radius: 5px;
+            transition: background 0.3s ease;
         }
         
         .tip-box .tip-title {
@@ -516,6 +584,39 @@
             }
         }
 
+        /* 返回頂部按鈕 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background 0.3s;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px var(--shadow-color);
+        }
+
         /* 超小螢幕 (360px以下) */
         @media screen and (max-width: 360px) {
             .header h1 {
@@ -537,6 +638,9 @@
 <body>
     <div class="container">
         <div class="header">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="切換深色模式">
+                <span id="theme-icon">🌙</span>
+            </button>
             <h1>🗾 北海道家庭之旅</h1>
             <div class="subtitle">2025.10.11 - 10.18｜4人同行</div>
         </div>
@@ -3757,7 +3861,12 @@
             </div>
         </div>
     </div>
-    
+
+    <!-- 返回頂部按鈕 -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="返回頂部">
+        ↑
+    </button>
+
     <script>
         function showSection(sectionId) {
             // 隱藏所有section
@@ -3779,6 +3888,90 @@
             // 滾動到頂部
             window.scrollTo(0, 0);
         }
+
+        // 待辦清單持久化功能
+        function saveCheckboxState() {
+            const checkboxes = document.querySelectorAll('.checkbox');
+            const states = {};
+            checkboxes.forEach((checkbox, index) => {
+                states[index] = checkbox.checked;
+            });
+            localStorage.setItem('hokkaidoChecklist', JSON.stringify(states));
+        }
+
+        function loadCheckboxState() {
+            const saved = localStorage.getItem('hokkaidoChecklist');
+            if (saved) {
+                const states = JSON.parse(saved);
+                const checkboxes = document.querySelectorAll('.checkbox');
+                checkboxes.forEach((checkbox, index) => {
+                    if (states[index] !== undefined) {
+                        checkbox.checked = states[index];
+                    }
+                });
+            }
+        }
+
+        // 深色模式切換功能
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.getElementById('theme-icon');
+
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeIcon.textContent = '☀️';
+            }
+        }
+
+        // 返回頂部功能
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function toggleBackToTop() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        }
+
+        // 頁面載入時執行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 載入主題設定
+            loadTheme();
+
+            // 載入checkbox狀態
+            loadCheckboxState();
+
+            // 為所有checkbox添加事件監聽
+            const checkboxes = document.querySelectorAll('.checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', saveCheckboxState);
+            });
+
+            // 監聽滾動事件來控制返回頂部按鈕
+            window.addEventListener('scroll', toggleBackToTop);
+        });
     </script>
 </body>
 </html>
