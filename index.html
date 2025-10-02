@@ -25,12 +25,26 @@
             --bg-gradient-end: #764ba2;
             --container-bg: white;
             --text-color: #333;
+            --text-secondary: #666;
             --card-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             --nav-bg: #f8f9fa;
             --nav-border: #e9ecef;
             --tip-bg: #fff3cd;
             --tip-border: #ffc107;
             --shadow-color: rgba(0,0,0,0.2);
+            --checklist-bg: #f8f9fa;
+            --info-bg: white;
+            --highlight-bg: #e9ecef;
+            --success-bg: #d4edda;
+            --warning-bg: #fff3cd;
+            --info-light-bg: #e3f2fd;
+            --orange-bg: #fff3e0;
+            --purple-bg: #f3e5f5;
+            --pink-bg: #fce4ec;
+            --yellow-bg: #fff9c4;
+            --light-blue-bg: #e1f5fe;
+            --light-green-bg: #e8f5e9;
+            --border-color: #dee2e6;
         }
 
         body.dark-mode {
@@ -38,12 +52,26 @@
             --bg-gradient-end: #16213e;
             --container-bg: #0f3460;
             --text-color: #e8e8e8;
+            --text-secondary: #b0b0b0;
             --card-bg: linear-gradient(135deg, #1e2a3a 0%, #243447 100%);
             --nav-bg: #1a2332;
             --nav-border: #2a3f5f;
             --tip-bg: #3d4e26;
             --tip-border: #6b8e23;
             --shadow-color: rgba(0,0,0,0.5);
+            --checklist-bg: #1a2332;
+            --info-bg: #1e2a3a;
+            --highlight-bg: #2a3f5f;
+            --success-bg: #1e3a1e;
+            --warning-bg: #3d3a1e;
+            --info-light-bg: #1e2f3a;
+            --orange-bg: #3a2e1e;
+            --purple-bg: #2e1e3a;
+            --pink-bg: #3a1e2e;
+            --yellow-bg: #3a3a1e;
+            --light-blue-bg: #1e2f3a;
+            --light-green-bg: #1e3a1e;
+            --border-color: #2a3f5f;
         }
 
         * {
@@ -138,9 +166,10 @@
         
         .nav-tab.active {
             color: #667eea;
-            background: white;
+            background: var(--info-bg);
             font-weight: bold;
             box-shadow: inset 0 -3px 0 #667eea;
+            transition: background 0.3s ease;
         }
         
         .content {
@@ -304,17 +333,19 @@
         }
         
         .checklist {
-            background: #f8f9fa;
+            background: var(--checklist-bg);
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 15px;
+            transition: background 0.3s ease;
         }
-        
+
         .checklist-title {
             font-size: 16px;
             font-weight: bold;
             margin-bottom: 10px;
-            color: #333;
+            color: var(--text-color);
+            transition: color 0.3s ease;
         }
         
         .checklist-item {
@@ -339,27 +370,30 @@
         }
         
         .restaurant-card {
-            background: white;
+            background: var(--info-bg);
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 10px;
-            border: 2px solid #f0f0f0;
+            border: 2px solid var(--border-color);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
-        
+
         .restaurant-name {
             font-size: 16px;
             font-weight: bold;
-            color: #333;
+            color: var(--text-color);
             margin-bottom: 5px;
+            transition: color 0.3s ease;
         }
-        
+
         .restaurant-type {
             display: inline-block;
-            background: #e9ecef;
+            background: var(--highlight-bg);
             padding: 2px 8px;
             border-radius: 10px;
             font-size: 12px;
             margin-right: 5px;
+            transition: background 0.3s ease;
         }
         
         .price-range {
@@ -369,8 +403,9 @@
         
         .restaurant-detail {
             font-size: 13px;
-            color: #666;
+            color: var(--text-secondary);
             margin-top: 8px;
+            transition: color 0.3s ease;
         }
         
         .transport-info {
@@ -418,11 +453,12 @@
         }
         
         .contact-item {
-            background: white;
+            background: var(--info-bg);
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 5px;
             font-size: 14px;
+            transition: background 0.3s ease;
         }
 
         /* 響應式設計 - 平板 (768px以上) */
@@ -632,6 +668,74 @@
             .content {
                 padding: 10px;
             }
+        }
+
+        /* 實用類別 - 處理深色模式 */
+        body.dark-mode div[style*="background: white"],
+        body.dark-mode div[style*="background: #fff"],
+        body.dark-mode div[style*="background:#fff"] {
+            background: var(--info-bg) !important;
+        }
+
+        body.dark-mode div[style*="background: #f0f0f0"],
+        body.dark-mode div[style*="background:#f0f0f0"] {
+            background: var(--highlight-bg) !important;
+        }
+
+        body.dark-mode div[style*="background: #e3f2fd"],
+        body.dark-mode div[style*="background:#e3f2fd"] {
+            background: var(--info-light-bg) !important;
+        }
+
+        body.dark-mode div[style*="background: #fff3e0"],
+        body.dark-mode div[style*="background:#fff3e0"] {
+            background: var(--orange-bg) !important;
+        }
+
+        body.dark-mode div[style*="background: #d4edda"],
+        body.dark-mode div[style*="background:#d4edda"] {
+            background: var(--success-bg) !important;
+        }
+
+        body.dark-mode div[style*="background: #fff3cd"],
+        body.dark-mode div[style*="background:#fff3cd"] {
+            background: var(--warning-bg) !important;
+        }
+
+        body.dark-mode div[style*="background: #e1f5fe"],
+        body.dark-mode div[style*="background:#e1f5fe"] {
+            background: var(--light-blue-bg) !important;
+        }
+
+        body.dark-mode div[style*="background: #e8f5e9"],
+        body.dark-mode div[style*="background:#e8f5e9"] {
+            background: var(--light-green-bg) !important;
+        }
+
+        body.dark-mode div[style*="background: #f3e5f5"],
+        body.dark-mode div[style*="background:#f3e5f5"] {
+            background: var(--purple-bg) !important;
+        }
+
+        body.dark-mode div[style*="background: #fce4ec"],
+        body.dark-mode div[style*="background:#fce4ec"] {
+            background: var(--pink-bg) !important;
+        }
+
+        body.dark-mode div[style*="background: #fff9c4"],
+        body.dark-mode div[style*="background:#fff9c4"] {
+            background: var(--yellow-bg) !important;
+        }
+
+        body.dark-mode div[style*="background: #f8d7da"],
+        body.dark-mode div[style*="background:#f8d7da"],
+        body.dark-mode div[style*="background: #ffebee"],
+        body.dark-mode div[style*="background:#ffebee"] {
+            background: #4a1e1e !important;
+        }
+
+        body.dark-mode span[style*="background"] {
+            background: var(--highlight-bg) !important;
         }
     </style>
 </head>
