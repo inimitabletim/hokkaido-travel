@@ -748,7 +748,104 @@
             background: var(--schedule-light);
             transform: translateY(-2px);
         }
-        
+
+        /* 每日摘要區塊 */
+        .day-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .summary-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-toggle {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .day-summary.collapsed .summary-toggle {
+            transform: rotate(180deg);
+        }
+
+        .summary-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        .day-summary.collapsed .summary-content {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .summary-section {
+            margin-bottom: 12px;
+        }
+
+        .summary-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .summary-label {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .summary-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .summary-item {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .summary-alerts {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .summary-alerts div {
+            margin-bottom: 4px;
+        }
+
+        .summary-alerts div:last-child {
+            margin-bottom: 0;
+        }
+
         .transport-badge {
             display: inline-block;
             background: #28a745;
@@ -2649,7 +2746,37 @@
                             <div class="day-location">✈️ 抵達札幌</div>
                         </div>
                     </div>
-                    
+
+                    <div class="day-summary">
+                        <div class="summary-header" onclick="toggleSummary(this)">
+                            <div class="summary-title">
+                                <span>✨</span>
+                                <span>今日重點</span>
+                            </div>
+                            <div class="summary-toggle">▼</div>
+                        </div>
+                        <div class="summary-content">
+                            <div class="summary-section">
+                                <div class="summary-label">📍 核心亮點</div>
+                                <div class="summary-items">
+                                    <div class="summary-item">✈️ 抵達新千歲機場</div>
+                                    <div class="summary-item">🏨 入住札幌飯店</div>
+                                    <div class="summary-item">🛍️ 狸小路商店街</div>
+                                    <div class="summary-item">🦀 かに將軍晚餐</div>
+                                </div>
+                            </div>
+                            <div class="summary-section">
+                                <div class="summary-label">⚠️ 關鍵提醒</div>
+                                <div class="summary-alerts">
+                                    <div>• 05:00 從家出發去機場</div>
+                                    <div>• 機場購買 ICOCA ¥2,000 + JR Pass ¥22,000</div>
+                                    <div>• かに將軍建議提前預約（17:30）</div>
+                                    <div>• 狸小路商店街營業至 21:00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="timeline">
                         <div class="timeline-item">
                             <span class="time-badge">06:20</span>
@@ -2772,7 +2899,37 @@
                             <div class="day-location">札幌深度遊</div>
                         </div>
                     </div>
-                    
+
+                    <div class="day-summary">
+                        <div class="summary-header" onclick="toggleSummary(this)">
+                            <div class="summary-title">
+                                <span>✨</span>
+                                <span>今日重點</span>
+                            </div>
+                            <div class="summary-toggle">▼</div>
+                        </div>
+                        <div class="summary-content">
+                            <div class="summary-section">
+                                <div class="summary-label">📍 核心亮點</div>
+                                <div class="summary-items">
+                                    <div class="summary-item">🍫 白色戀人公園</div>
+                                    <div class="summary-item">⛩️ 北海道神宮</div>
+                                    <div class="summary-item">🌸 圓山公園</div>
+                                    <div class="summary-item">🍖 達摩成吉思汗烤肉</div>
+                                </div>
+                            </div>
+                            <div class="summary-section">
+                                <div class="summary-label">⚠️ 關鍵提醒</div>
+                                <div class="summary-alerts">
+                                    <div>• 購買ドニチカキップ（週日券）¥520</div>
+                                    <div>• 白色戀人公園門票 ¥800，停留 2.5-3h</div>
+                                    <div>• 圓山→神宮需搭巴士 ¥210（或步行 15 分）</div>
+                                    <div>• 達摩本店 17:00 營業，建議提前排隊</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="timeline">
                         <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
                             <span class="time-badge" style="background: #2196f3;">🎫</span>
@@ -2872,6 +3029,37 @@
                         <div class="day-title">
                             <div class="day-date">10月13日 星期一</div>
                             <div class="day-location">小樽半日遊→洞爺湖</div>
+                        </div>
+                    </div>
+
+                    <div class="day-summary">
+                        <div class="summary-header" onclick="toggleSummary(this)">
+                            <div class="summary-title">
+                                <span>✨</span>
+                                <span>今日重點</span>
+                            </div>
+                            <div class="summary-toggle">▼</div>
+                        </div>
+                        <div class="summary-content">
+                            <div class="summary-section">
+                                <div class="summary-label">📍 核心亮點</div>
+                                <div class="summary-items">
+                                    <div class="summary-item">🏮 小樽運河</div>
+                                    <div class="summary-item">🛍️ 堺町通商店街</div>
+                                    <div class="summary-item">🥐 六花亭現烤餅</div>
+                                    <div class="summary-item">🌊 洞爺湖溫泉</div>
+                                </div>
+                            </div>
+                            <div class="summary-section">
+                                <div class="summary-label">⚠️ 關鍵提醒</div>
+                                <div class="summary-alerts">
+                                    <div>• 08:00 退房，帶全部行李</div>
+                                    <div>• ✅ JR Pass 今天開始使用（第 1 天）</div>
+                                    <div>• 12:30 前務必回小樽站取行李</div>
+                                    <div>• 13:42 特急北斗往洞爺（需預約指定席）</div>
+                                    <div>• 洞爺站→溫泉巴士 ¥340（飯店無接駁車）</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -3059,6 +3247,37 @@
                         </div>
                     </div>
 
+                    <div class="day-summary">
+                        <div class="summary-header" onclick="toggleSummary(this)">
+                            <div class="summary-title">
+                                <span>✨</span>
+                                <span>今日重點</span>
+                            </div>
+                            <div class="summary-toggle">▼</div>
+                        </div>
+                        <div class="summary-content">
+                            <div class="summary-section">
+                                <div class="summary-label">📍 核心亮點</div>
+                                <div class="summary-items">
+                                    <div class="summary-item">⛴️ 洞爺湖遊覽船</div>
+                                    <div class="summary-item">🚡 有珠山纜車</div>
+                                    <div class="summary-item">🌋 昭和新山</div>
+                                    <div class="summary-item">♨️ 溫泉與煙火</div>
+                                </div>
+                            </div>
+                            <div class="summary-section">
+                                <div class="summary-label">⚠️ 關鍵提醒</div>
+                                <div class="summary-alerts">
+                                    <div>• JR Pass 今天休息，使用 ICOCA + 巴士</div>
+                                    <div>• 道南巴士往返有珠山 ¥340（班次少！）</div>
+                                    <div>• 有珠山纜車 ¥1,800（6 分鐘到山頂）</div>
+                                    <div>• 洞爺湖煙火 20:45（4月底-10月底）</div>
+                                    <div>• 建議請飯店協助查詢巴士時刻表</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="timeline">
                         <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
                             <span class="time-badge" style="background: #2196f3;">🎫</span>
@@ -3184,6 +3403,37 @@
                         </div>
                     </div>
 
+                    <div class="day-summary">
+                        <div class="summary-header" onclick="toggleSummary(this)">
+                            <div class="summary-title">
+                                <span>✨</span>
+                                <span>今日重點</span>
+                            </div>
+                            <div class="summary-toggle">▼</div>
+                        </div>
+                        <div class="summary-content">
+                            <div class="summary-section">
+                                <div class="summary-label">📍 核心亮點</div>
+                                <div class="summary-items">
+                                    <div class="summary-item">🚃 特急北斗號</div>
+                                    <div class="summary-item">🌸 五稜郭公園</div>
+                                    <div class="summary-item">🏔️ 函館山夜景</div>
+                                    <div class="summary-item">🏭 金森紅磚倉庫</div>
+                                </div>
+                            </div>
+                            <div class="summary-section">
+                                <div class="summary-label">⚠️ 關鍵提醒</div>
+                                <div class="summary-alerts">
+                                    <div>• 11:00 前退房，帶全部行李</div>
+                                    <div>• 洞爺湖溫泉→洞爺站 巴士 ¥340（建議搭計程車 ¥2,500）</div>
+                                    <div>• 特急北斗16號 12:12 發車（需預約指定席）</div>
+                                    <div>• 函館市電一日券 ¥600（今明各買1張）</div>
+                                    <div>• 函館山纜車 ¥1,500，16:30 日落前上山</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="timeline">
                         <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
                             <span class="time-badge" style="background: #2196f3;">🎫</span>
@@ -3299,7 +3549,38 @@
                             <div class="day-location">函館文化美食之旅</div>
                         </div>
                     </div>
-                    
+
+                    <div class="day-summary">
+                        <div class="summary-header" onclick="toggleSummary(this)">
+                            <div class="summary-title">
+                                <span>✨</span>
+                                <span>今日重點</span>
+                            </div>
+                            <div class="summary-toggle">▼</div>
+                        </div>
+                        <div class="summary-content">
+                            <div class="summary-section">
+                                <div class="summary-label">📍 核心亮點</div>
+                                <div class="summary-items">
+                                    <div class="summary-item">🐟 函館朝市</div>
+                                    <div class="summary-item">⛪ 八幡坂</div>
+                                    <div class="summary-item">🏛️ 元町教堂群</div>
+                                    <div class="summary-item">🍜 大門橫丁</div>
+                                </div>
+                            </div>
+                            <div class="summary-section">
+                                <div class="summary-label">⚠️ 關鍵提醒</div>
+                                <div class="summary-alerts">
+                                    <div>• 函館朝市 06:00 開始營業</div>
+                                    <div>• 10:00 前退房，行李寄放飯店</div>
+                                    <div>• 市電一日券 ¥600（五稜郭→元町）</div>
+                                    <div>• 元町教堂區大多免費參觀</div>
+                                    <div>• 大門橫丁晚餐（鹽拉麵推薦）</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="timeline">
                         <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
                             <span class="time-badge" style="background: #2196f3;">🎫</span>
@@ -3440,7 +3721,39 @@
                             <div class="day-location">返回札幌</div>
                         </div>
                     </div>
-                    
+
+                    <div class="day-summary">
+                        <div class="summary-header" onclick="toggleSummary(this)">
+                            <div class="summary-title">
+                                <span>✨</span>
+                                <span>今日重點</span>
+                            </div>
+                            <div class="summary-toggle">▼</div>
+                        </div>
+                        <div class="summary-content">
+                            <div class="summary-section">
+                                <div class="summary-label">📍 核心亮點</div>
+                                <div class="summary-items">
+                                    <div class="summary-item">🚃 特急北斗返札幌</div>
+                                    <div class="summary-item">🍫 白色戀人公園</div>
+                                    <div class="summary-item">🛍️ 狸小路採購</div>
+                                    <div class="summary-item">🦀 海鮮市場</div>
+                                </div>
+                            </div>
+                            <div class="summary-section">
+                                <div class="summary-label">⚠️ 關鍵提醒</div>
+                                <div class="summary-alerts">
+                                    <div>• 07:30 早餐 & 08:30 前退房</div>
+                                    <div>• 特急北斗6號 09:18 發車（需預約指定席）</div>
+                                    <div>• ⚠️ 在新札幌站下車（札幌站前一站）</div>
+                                    <div>• ✅ JR Pass 今天是最後使用日（第 5 天）</div>
+                                    <div>• 白色戀人公園門票 ¥800（如要再訪）</div>
+                                    <div>• 最後採購機會：狸小路、二條市場</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="timeline">
                         <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
                             <span class="time-badge" style="background: #2196f3;">🎫</span>
@@ -3554,7 +3867,39 @@
                             <div class="day-location">✈️ 返回台灣</div>
                         </div>
                     </div>
-                    
+
+                    <div class="day-summary">
+                        <div class="summary-header" onclick="toggleSummary(this)">
+                            <div class="summary-title">
+                                <span>✨</span>
+                                <span>今日重點</span>
+                            </div>
+                            <div class="summary-toggle">▼</div>
+                        </div>
+                        <div class="summary-content">
+                            <div class="summary-section">
+                                <div class="summary-label">📍 核心亮點</div>
+                                <div class="summary-items">
+                                    <div class="summary-item">🛍️ 最後採購</div>
+                                    <div class="summary-item">✈️ 新千歲機場</div>
+                                    <div class="summary-item">🎁 機場伴手禮</div>
+                                    <div class="summary-item">🏠 返回台灣</div>
+                                </div>
+                            </div>
+                            <div class="summary-section">
+                                <div class="summary-label">⚠️ 關鍵提醒</div>
+                                <div class="summary-alerts">
+                                    <div>• 06:30 起床，07:00 退房</div>
+                                    <div>• 新札幌→機場 JR 快速 Airport 07:30（28 分鐘）</div>
+                                    <div>• 使用 ICOCA 卡 ¥800-900（JR Pass 已用完）</div>
+                                    <div>• ⚠️ 預留 2 小時辦理登機、退稅、託運</div>
+                                    <div>• 航班：IT235，13:30 起飛（提前 2 小時到）</div>
+                                    <div>• 確認護照、機票、檢查行李重量</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="timeline">
                         <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
                             <span class="time-badge" style="background: #2196f3;">🎫</span>
@@ -4623,6 +4968,36 @@
             saveTimelineState(itemId, !isCollapsed);
         }
 
+        // 每日摘要摺疊功能
+        function toggleSummary(headerElement) {
+            const summaryDiv = headerElement.parentElement;
+            summaryDiv.classList.toggle('collapsed');
+
+            // 保存狀態到 localStorage
+            const daySection = summaryDiv.closest('.section');
+            if (daySection) {
+                const dayId = daySection.id;
+                const isCollapsed = summaryDiv.classList.contains('collapsed');
+                const states = JSON.parse(localStorage.getItem('summarStates') || '{}');
+                states[dayId] = isCollapsed;
+                localStorage.setItem('summaryStates', JSON.stringify(states));
+            }
+        }
+
+        // 載入摘要狀態
+        function loadSummaryStates() {
+            const states = JSON.parse(localStorage.getItem('summaryStates') || '{}');
+            Object.keys(states).forEach(dayId => {
+                const section = document.getElementById(dayId);
+                if (section && states[dayId]) {
+                    const summary = section.querySelector('.day-summary');
+                    if (summary) {
+                        summary.classList.add('collapsed');
+                    }
+                }
+            });
+        }
+
         function toggleAllTimeline(sectionId, expand) {
             const section = document.getElementById(sectionId);
             if (!section) return;
@@ -4675,6 +5050,7 @@
         // 頁面載入時初始化
         document.addEventListener('DOMContentLoaded', function() {
             initTimelineCollapse();
+            loadSummaryStates();
         });
 
         // ==================== 分享功能 ====================
