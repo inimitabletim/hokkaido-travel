@@ -2046,6 +2046,96 @@
             color: #28a745;
         }
 
+        /* 時間軸摺疊功能 */
+        .timeline-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+            margin-bottom: 8px;
+        }
+
+        .timeline-basic {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .timeline-expand-btn {
+            background: #e0e0e0;
+            color: #333;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .timeline-expand-btn:hover {
+            background: #d0d0d0;
+        }
+
+        .timeline-expand-btn .icon {
+            transition: transform 0.3s ease;
+            font-size: 10px;
+        }
+
+        .timeline-item.expanded .timeline-expand-btn .icon {
+            transform: rotate(180deg);
+        }
+
+        .timeline-detail {
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .timeline-item.expanded .timeline-detail {
+            max-height: 800px;
+            opacity: 1;
+            margin-top: 8px;
+        }
+
+        /* 重要度標記 */
+        .importance-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            margin-left: 8px;
+            white-space: nowrap;
+        }
+
+        .importance-must {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            box-shadow: 0 2px 4px rgba(255, 107, 107, 0.3);
+        }
+
+        .importance-recommend {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            box-shadow: 0 2px 4px rgba(79, 172, 254, 0.3);
+        }
+
+        .importance-optional {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #666;
+            box-shadow: 0 2px 4px rgba(168, 237, 234, 0.3);
+        }
+
         button {
             position: relative;
             overflow: hidden;
@@ -3116,38 +3206,70 @@
                     </div>
 
                     <div class="timeline">
-                        <div class="timeline-item">
-                            <span class="time-badge">06:20</span>
-                            <div class="activity-title">桃園機場集合</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d1-activity-1">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d1-activity-1')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">06:20</span>
+                                    <div class="activity-title">桃園機場集合</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 第二航廈3樓虎航櫃檯<br>
                                 <span class="transport-badge">🚕 建議05:00從家出發</span>
                             </div>
                         </div>
-                        
-                        <div class="timeline-item">
-                            <span class="time-badge">08:20</span>
-                            <div class="activity-title">起飛前往札幌</div>
-                            <div class="activity-detail">
+
+                        <div class="timeline-item" data-item-id="d1-activity-2">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d1-activity-2')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">08:20</span>
+                                    <div class="activity-title">起飛前往札幌</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 航班：IT234 虎航<br>
                                 飛行時間：約3小時45分
                             </div>
                         </div>
-                        
-                        <div class="timeline-item">
-                            <span class="time-badge">11:05</span>
-                            <div class="activity-title">抵達新千歲機場</div>
-                            <div class="activity-detail">
+
+                        <div class="timeline-item" data-item-id="d1-activity-3">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d1-activity-3')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">11:05</span>
+                                    <div class="activity-title">抵達新千歲機場</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 • 入境審查（準備護照）<br>
                                 • 領取行李（拍照記錄轉盤號碼）<br>
                                 • 兌換JR Pass（B1樓JR服務中心 08:30-19:00）
                             </div>
                         </div>
 
-                        <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
-                            <span class="time-badge" style="background: #2196f3;">🎫</span>
-                            <div class="activity-title">機場 → 札幌</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d1-activity-4" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d1-activity-4')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge" style="background: #2196f3;">🎫</span>
+                                    <div class="activity-title">機場 → 札幌</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <b>📍 機場任務：</b><br>
                                 1️⃣ 兌換 JR Pass（10/13 開始使用，可預約 Day 3-7 指定席）<br>
                                 2️⃣ ICOCA 儲值 ¥3,000/人<br><br>
@@ -3160,65 +3282,124 @@
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">12:00</span>
-                            <div class="activity-title">機場簡便午餐</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d1-activity-5">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d1-activity-5')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">12:00</span>
+                                    <div class="activity-title">機場簡便午餐</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🍱 機場便當或輕食</span><br>
                                 預算：¥800/人 | 快速用餐，留肚子給市區美食！
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">13:00</span>
-                            <div class="activity-title">前往札幌市區</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d1-activity-6">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d1-activity-6')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">13:00</span>
+                                    <div class="activity-title">前往札幌市區</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚃 JR快速Airport</span><br>
                                 ICOCA 刷卡進站 | 注意搭乘「快速」而非「普通」
                             </div>
                         </div>
-                        
-                        <div class="timeline-item">
-                            <span class="time-badge">14:00</span>
-                            <div class="activity-title">飯店寄放行李</div>
-                            <div class="activity-detail">
+
+                        <div class="timeline-item" data-item-id="d1-activity-7">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d1-activity-7')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">14:00</span>
+                                    <div class="activity-title">飯店寄放行李</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 札幌格蘭大酒店（札幌站南口步行5分鐘）<br>
                                 ⚠️ 正式 Check-in：15:00（先寄放行李即可）
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">15:00</span>
-                            <div class="activity-title">大通公園散步</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d1-activity-8">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d1-activity-8')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">15:00</span>
+                                    <div class="activity-title">大通公園散步</div>
+                                    <span class="importance-badge importance-recommend">⭐⭐ 推薦</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚶 步行5分鐘</span><br>
                                 電視塔：¥1,000（選） | 烤玉米：¥300（推薦）<br>
                                 💡 輕鬆散步即可，保留胃口給晚上螃蟹料理
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">16:30</span>
-                            <div class="activity-title">回飯店 Check-in & 休息</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d1-activity-9">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d1-activity-9')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">16:30</span>
+                                    <div class="activity-title">回飯店 Check-in & 休息</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 辦理入住、稍作休息
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">18:30</span>
-                            <div class="activity-title">晚餐：かに將軍（螃蟹料理）</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d1-activity-10">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d1-activity-10')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">18:30</span>
+                                    <div class="activity-title">晚餐：かに將軍（螃蟹料理）</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🦀 螃蟹會席</span><br>
                                 預算：¥4,000-6,000/人 | ⭐ 需預約<br>
                                 💡 詳細資訊請參考 <b>🍜 美食</b> 分頁
                             </div>
                         </div>
-                        
-                        <div class="timeline-item">
-                            <span class="time-badge">20:30</span>
-                            <div class="activity-title">狸小路購物</div>
-                            <div class="activity-detail">
+
+                        <div class="timeline-item" data-item-id="d1-activity-11">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d1-activity-11')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">20:30</span>
+                                    <div class="activity-title">狸小路購物</div>
+                                    <span class="importance-badge importance-optional">⭐ 可選</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 藥妝店、唐吉訶德（24h）| 記得帶護照退稅<br>
                                 💡 可買宵夜、隔天早餐
                             </div>
@@ -3269,67 +3450,125 @@
                     </div>
 
                     <div class="timeline">
-                        <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
-                            <span class="time-badge" style="background: #2196f3;">🎫</span>
-                            <div class="activity-title">札幌地鐵一日遊</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d2-activity-1" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d2-activity-1')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge" style="background: #2196f3;">🎫</span>
+                                    <div class="activity-title">札幌地鐵一日遊</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <b style="color: #1976d2;">🚇 ドニチカキップ（週日券）：¥520</b><br>
                                 今日 5 趟地鐵，原價 ¥1,170，省 ¥650！<br>
                                 💡 圓山→神宮需搭巴士（¥210）
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">07:30</span>
-                            <div class="activity-title">飯店自助早餐</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d2-activity-2">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d2-activity-2')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">07:30</span>
+                                    <div class="activity-title">飯店自助早餐</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🍽️ 札幌格蘭大酒店早餐</span><br>
                                 北海道食材豐富 | 悠閒用餐
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">10:00</span>
-                            <div class="activity-title">白色戀人公園</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d2-activity-3">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d2-activity-3')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">10:00</span>
+                                    <div class="activity-title">白色戀人公園</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚇 東西線→宮之澤站（25分）</span><br>
                                 門票：¥800 | 停留：2.5-3h | 霜淇淋必吃<br>
                                 💡 巧克力工廠、歐式庭園、DIY 餅乾
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">12:00</span>
-                            <div class="activity-title">公園內午餐</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d2-activity-4">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d2-activity-4')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">12:00</span>
+                                    <div class="activity-title">公園內午餐</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🍽️ 梟巢餐廳（推薦）</span><br>
                                 湯咖哩：¥1,500-2,000 | 停留：1h
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">13:30</span>
-                            <div class="activity-title">北海道神宮</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d2-activity-5">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d2-activity-5')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">13:30</span>
+                                    <div class="activity-title">北海道神宮</div>
+                                    <span class="importance-badge importance-recommend">⭐⭐ 推薦</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚇 圓山公園站 + 🚌 巴士¥210（5分）</span><br>
                                 或步行 15 分 | 參拜：二拜二拍手一拜<br>
                                 💡 六花亭茶屋限定點心 ¥350
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">15:00</span>
-                            <div class="activity-title">回飯店休息</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d2-activity-6">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d2-activity-6')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">15:00</span>
+                                    <div class="activity-title">回飯店休息</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚇 大通站</span><br>
                                 休息 2-3h | 17:00 再出發
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">17:30</span>
-                            <div class="activity-title">晚餐：達摩本店（成吉思汗烤肉）</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d2-activity-7">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d2-activity-7')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">17:30</span>
+                                    <div class="activity-title">晚餐：達摩本店（成吉思汗烤肉）</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚇 薄野站（2站）</span>
                                 <span class="food-badge">🍖 生羊肉</span><br>
                                 預算：¥3,000-4,000 | 17:00 營業，需排隊 30-60 分<br>
@@ -3337,10 +3576,18 @@
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">20:00</span>
-                            <div class="activity-title">薄野周邊散步</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d2-activity-8">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d2-activity-8')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">20:00</span>
+                                    <div class="activity-title">薄野周邊散步</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 薄野十字路口夜景 | 唐吉訶德（24h）| 拉麵橫丁<br>
                                 • 薄野站搭地鐵2站到札幌站<br>
                                 • 車程5分鐘<br>
@@ -3402,10 +3649,18 @@
                     </div>
 
                     <div class="timeline">
-                        <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
-                            <span class="time-badge" style="background: #2196f3;">🎫</span>
-                            <div class="activity-title">札幌 → 小樽 → 洞爺湖</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-1" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-1')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge" style="background: #2196f3;">🎫</span>
+                                    <div class="activity-title">札幌 → 小樽 → 洞爺湖</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <b style="color: #1976d2;">✅ JR Pass 開始使用（第 1 天）</b><br>
                                 🚃 札幌→小樽：JR 快速（40分）自由席<br>
                                 🚃 小樽→洞爺：JR 特急北斗 13:42（1h46m）需劃位<br>
@@ -3414,82 +3669,165 @@
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">08:00</span>
-                            <div class="activity-title">飯店退房</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-2">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-2')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">08:00</span>
+                                    <div class="activity-title">飯店退房</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 帶全部行李 | 確認 JR Pass 與指定席
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">08:30</span>
-                            <div class="activity-title">前往小樽</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-3">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-3')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">08:30</span>
+                                    <div class="activity-title">前往小樽</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 🚃 JR 函館本線快速（40分）自由席 | 札幌 4 號月台 | 右側看海景
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">09:10</span>
-                            <div class="activity-title">JR小樽站寄放行李</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-4">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-4')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">09:10</span>
+                                    <div class="activity-title">JR小樽站寄放行李</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 置物櫃：大 ¥700 / 中 ¥500 | 📸 拍照記錄櫃號
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">09:25</span>
-                            <div class="activity-title">前往南小樽（起點）</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-5">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-5')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">09:25</span>
+                                    <div class="activity-title">前往南小樽（起點）</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 🚃 建議搭 JR 1 站到南小樽（2分）| 從南往北逛不走回頭路
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">09:35</span>
-                            <div class="activity-title">童話十字路口</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-6">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-6')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">09:35</span>
+                                    <div class="activity-title">童話十字路口</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 堺町通起點 | 蒸氣鐘（每15分鐘噴氣）| 歐式建築拍照
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">09:50</span>
-                            <div class="activity-title">堺町通商店街</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-7">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-7')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">09:50</span>
+                                    <div class="activity-title">堺町通商店街</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 北一硝子 | 音樂盒堂 | LeTAO 本店 | 重點逛 LeTAO、北一硝子
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">10:30</span>
-                            <div class="activity-title">六花亭現烤餅</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-8">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-8')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">10:30</span>
+                                    <div class="activity-title">六花亭現烤餅</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 🥐 六花亭堺町通店 | <b>現烤葡萄奶油餅</b>（免費）| 小樽限定，每人限2個
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">11:00</span>
-                            <div class="activity-title">北菓樓快速採購</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-9">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-9')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">11:00</span>
+                                    <div class="activity-title">北菓樓快速採購</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 🍰 北菓樓堺町通店 | 泡芙 ¥300（現吃）| 年輪蛋糕伴手禮
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">11:15</span>
-                            <div class="activity-title">小樽運河拍照</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-10">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-10')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">11:15</span>
+                                    <div class="activity-title">小樽運河拍照</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 📸 淺草橋拍攝倉庫群（步行5分）| 可選運河遊船 ¥1,500
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">11:30</span>
-                            <div class="activity-title">午餐：海鮮丼 or 壽司</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-11">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-11')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">11:30</span>
+                                    <div class="activity-title">午餐：海鮮丼 or 壽司</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <b>選項 1：</b>滝波食堂（三角市場）¥2,000-3,500 | 自選海鮮丼<br>
                                 <b>選項 2：</b>政壽司本店 ¥3,800-6,000 | 板前壽司體驗<br>
                                 ⚠️ 11:00 前抵達避開人潮 | 預留 1.5-2 小時（含排隊）<br>
@@ -3497,76 +3835,149 @@
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">12:20</span>
-                            <div class="activity-title">回小樽站取行李</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-12">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-12')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">12:20</span>
+                                    <div class="activity-title">回小樽站取行李</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 從三角市場步行5分至小樽站 | 取行李準備搭車
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">12:30</span>
-                            <div class="activity-title">返回札幌</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-13">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-13')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">12:30</span>
+                                    <div class="activity-title">返回札幌</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 🚃 JR 快速回札幌（40分）| 班次：12:27 / 12:49
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">13:30</span>
-                            <div class="activity-title">前往洞爺湖</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-14">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-14')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">13:30</span>
+                                    <div class="activity-title">前往洞爺湖</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 🚃 JR 特急北斗（1h40m）指定席 | 右側看羊蹄山
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">15:10</span>
-                            <div class="activity-title">抵達洞爺站→前往飯店</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-15">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-15')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">15:10</span>
+                                    <div class="activity-title">抵達洞爺站→前往飯店</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 🚌 道南巴士 ¥340（20分）| 🚕 計程車 ¥2,000-3,000<br>
                                 ⚠️ 無接駁車 | 4人分攤計程車較划算
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">15:00</span>
-                            <div class="activity-title">飯店入住</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-16">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-16')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">15:00</span>
+                                    <div class="activity-title">飯店入住</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 ♨️ ザ・レイクスイート 湖の栖 | 全客室私人露天溫泉 | 湖景
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">15:30</span>
-                            <div class="activity-title">溫泉街散步</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-17">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-17')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">15:30</span>
+                                    <div class="activity-title">溫泉街散步</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 湖畔散步道 | 免費足湯 | 雕刻公園 | 溫泉布丁 ¥350
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">18:00</span>
-                            <div class="activity-title">飯店晚餐</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-18">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-18')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">18:00</span>
+                                    <div class="activity-title">飯店晚餐</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 飯店內用餐（建議預訂）| 私人溫泉 | 準備觀賞煙火
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">20:45</span>
-                            <div class="activity-title">洞爺湖煙火秀</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-19">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-19')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">20:45</span>
+                                    <div class="activity-title">洞爺湖煙火秀</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 🎆 4月底-10月底每晚 20:45（20分）| 飯店陽台或湖畔觀賞<br>
                                 ⚠️ 10月下旬可能已結束 | 湖邊較涼記得帶外套
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">21:30</span>
-                            <div class="activity-title">享受溫泉</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d3-activity-20">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d3-activity-20')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">21:30</span>
+                                    <div class="activity-title">享受溫泉</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 泡私人露天溫泉 | 夜晚湖景 | 早點休息
                             </div>
                         </div>
@@ -3617,10 +4028,18 @@
                     </div>
 
                     <div class="timeline">
-                        <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
-                            <span class="time-badge" style="background: #2196f3;">🎫</span>
-                            <div class="activity-title">Day 4 交通安排</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d4-activity-1" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d4-activity-1')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge" style="background: #2196f3;">🎫</span>
+                                    <div class="activity-title">Day 4 交通安排</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <b style="color: #1976d2;">🚌 ICOCA + 巴士（JR Pass 第2天休息）</b><br>
                                 🚌 道南巴士往返有珠山：¥340 單程（15分）| 班次少，注意時刻表<br>
                                 🚡 有珠山纜車：¥1,800（6分直達山頂）| 無障礙設計<br>
@@ -3628,101 +4047,201 @@
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">08:00</span>
-                            <div class="activity-title">飯店早餐</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d4-activity-2">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d4-activity-2')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">08:00</span>
+                                    <div class="activity-title">飯店早餐</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 飯店早餐 | 面湖餐廳欣賞晨景 | 悠閒用餐
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">09:00</span>
-                            <div class="activity-title">晨間溫泉</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d4-activity-3">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d4-activity-3')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">09:00</span>
+                                    <div class="activity-title">晨間溫泉</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 私人露天溫泉 | 欣賞洞爺湖晨景 | 寧靜湖畔時光
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">10:30</span>
-                            <div class="activity-title">洞爺湖遊覽船</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d4-activity-4">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d4-activity-4')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">10:30</span>
+                                    <div class="activity-title">洞爺湖遊覽船</div>
+                                    <span class="importance-badge importance-recommend">⭐⭐ 推薦</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 🚢 城堡造型觀光船 ¥1,500（50分）| 可登中島散步<br>
                                 每30分一班 | 二樓甲板風景最佳 | 可餵海鷗
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">12:00</span>
-                            <div class="activity-title">午餐：湖畔料理</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d4-activity-5">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d4-activity-5')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">12:00</span>
+                                    <div class="activity-title">午餐：湖畔料理</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 🍱 望羊蹄餐廳（萬世閣內）| 烤扇貝定食 ¥1,800 | 無需預約
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">13:30</span>
-                            <div class="activity-title">有珠山纜車</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d4-activity-6">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d4-activity-6')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">13:30</span>
+                                    <div class="activity-title">有珠山纜車</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 🚌 巴士15分 | 🚡 纜車 ¥1,800（6分直達）| 360度火山全景<br>
                                 無障礙設計 | 活火山噴氣孔 | 洞爺湖絕佳視角 | 約1.5小時
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">14:30</span>
-                            <div class="activity-title">昭和新山&熊牧場（可選）</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d4-activity-7">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d4-activity-7')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">14:30</span>
+                                    <div class="activity-title">昭和新山&熊牧場（可選）</div>
+                                    <span class="importance-badge importance-recommend">⭐⭐ 推薦</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 火山遺跡免費參觀 | 熊牧場 ¥850（可選）| 拍照、霜淇淋
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">15:30</span>
-                            <div class="activity-title">返回飯店</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d4-activity-8">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d4-activity-8')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">15:30</span>
+                                    <div class="activity-title">返回飯店</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 🚌 巴士回溫泉街 | 回飯店休息 | 準備溫泉時光
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">16:00</span>
-                            <div class="activity-title">下午溫泉時光</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d4-activity-9">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d4-activity-9')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">16:00</span>
+                                    <div class="activity-title">下午溫泉時光</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 私人露天溫泉 | 洞爺湖午後美景 | 完全放鬆
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">18:00</span>
-                            <div class="activity-title">飯店晚餐</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d4-activity-10">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d4-activity-10')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">18:00</span>
+                                    <div class="activity-title">飯店晚餐</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 飯店內用餐 | 會席料理或自助餐 | 當地食材
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">20:00</span>
-                            <div class="activity-title">湖畔散步</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d4-activity-11">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d4-activity-11')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">20:00</span>
+                                    <div class="activity-title">湖畔散步</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 溫泉街夜晚漫步 | 免費足湯 | 溫泉布丁 ¥350 | 準備觀賞煙火
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">20:45</span>
-                            <div class="activity-title">洞爺湖煙火秀</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d4-activity-12">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d4-activity-12')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">20:45</span>
+                                    <div class="activity-title">洞爺湖煙火秀</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 🎆 4月底-10月底每晚 20:45（20分）| 飯店陽台或湖畔觀賞<br>
                                 ⚠️ 10月下旬可能已結束 | 湖邊較涼記得帶外套
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">21:30</span>
-                            <div class="activity-title">夜間溫泉</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d4-activity-13">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d4-activity-13')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">21:30</span>
+                                    <div class="activity-title">夜間溫泉</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 夜間溫泉 | 洞爺湖夜景 | 早點休息
                             </div>
                         </div>
@@ -3773,10 +4292,18 @@
                     </div>
 
                     <div class="timeline">
-                        <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
-                            <span class="time-badge" style="background: #2196f3;">🎫</span>
-                            <div class="activity-title">Day 5 交通安排</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d5-activity-1" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d5-activity-1')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge" style="background: #2196f3;">🎫</span>
+                                    <div class="activity-title">Day 5 交通安排</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <b style="color: #1976d2;">✅ 使用 JR Pass 5日券（第3天）</b><br><br>
 
                                 <b>📍 今日路線：</b>洞爺湖→函館<br><br>
@@ -3787,89 +4314,171 @@
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">08:00</span>
-                            <div class="activity-title">飯店早餐 & 晨間溫泉</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d5-activity-2">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d5-activity-2')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">08:00</span>
+                                    <div class="activity-title">飯店早餐 & 晨間溫泉</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 面湖餐廳早餐 | 最後一次泡私人露天溫泉 | 欣賞洞爺湖晨景
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">10:30</span>
-                            <div class="activity-title">飯店退房→前往JR洞爺站</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d5-activity-3">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d5-activity-3')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">10:30</span>
+                                    <div class="activity-title">飯店退房→前往JR洞爺站</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">♨️ ザ・レイクスイート 湖の栖</span><br>
                                 Check-out: 11:00 | <span class="transport-badge">🚌 道南巴士 ¥340</span> 或 <span class="transport-badge">🚕 計程車 ¥2,000-3,000（推薦）</span>
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">11:30</span>
-                            <div class="activity-title">車站簡餐</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d5-activity-4">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d5-activity-4')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">11:30</span>
+                                    <div class="activity-title">車站簡餐</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 JR洞爺站內便當或附近餐廳 | 預算：¥1,000/人
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">12:12</span>
-                            <div class="activity-title">前往函館</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d5-activity-5">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d5-activity-5')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">12:12</span>
+                                    <div class="activity-title">前往函館</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚃 JR特急北斗16號</span><br>
                                 2h4m | 指定席已在 Day 1 劃好 | 14:16 抵達函館站
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">14:30</span>
-                            <div class="activity-title">抵達函館→飯店Check-in</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d5-activity-6">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d5-activity-6')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">14:30</span>
+                                    <div class="activity-title">抵達函館→飯店Check-in</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🏨 fav HAKODATE</span><br>
                                 購買市電一日券 ¥600 | 領取函館朝市餐券（明日早餐用）<br>
                                 ⏰ Check-in: 15:00 / Check-out: 10:00（比其他飯店早1小時）
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">15:30</span>
-                            <div class="activity-title">金森紅磚倉庫</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d5-activity-7">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d5-activity-7')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">15:30</span>
+                                    <div class="activity-title">金森紅磚倉庫</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚋 市電→十字街站</span><br>
                                 明治倉庫群 | 音樂盒、玻璃製品 | 函館啤酒館、Petite Merveille 起司蛋糕
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">17:00</span>
-                            <div class="activity-title">函館山纜車</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d5-activity-8">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d5-activity-8')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">17:00</span>
+                                    <div class="activity-title">函館山纜車</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚡 纜車來回 ¥1,800</span><br>
                                 從紅磚倉庫步行15分 | 17:00前上山卡位 | ⚠️ 山頂溫度低10度，帶外套
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">18:30</span>
-                            <div class="activity-title">百萬夜景</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d5-activity-9">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d5-activity-9')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">18:30</span>
+                                    <div class="activity-title">百萬夜景</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 世界三大夜景 | 最佳拍攝點：展望台2樓 | 避開團客往停車場方向
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">19:30</span>
-                            <div class="activity-title">晚餐：函館名物</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d5-activity-10">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d5-activity-10')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">19:30</span>
+                                    <div class="activity-title">晚餐：函館名物</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🍜 あじさい（鹽味拉麵）¥1,200</span> 或 <span class="food-badge">🍔 幸運小丑漢堡 ¥1,000</span><br>
                                 💡 建議選拉麵（明日午餐會吃幸運小丑）
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">21:00</span>
-                            <div class="activity-title">返回飯店休息</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d5-activity-11">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d5-activity-11')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">21:00</span>
+                                    <div class="activity-title">返回飯店休息</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 整理行李、準備明日朝市
                             </div>
                         </div>
@@ -3920,10 +4529,18 @@
                     </div>
 
                     <div class="timeline">
-                        <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
-                            <span class="time-badge" style="background: #2196f3;">🎫</span>
-                            <div class="activity-title">Day 6 交通安排</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d6-activity-1" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d6-activity-1')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge" style="background: #2196f3;">🎫</span>
+                                    <div class="activity-title">Day 6 交通安排</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <b style="color: #1976d2;">🚌 五稜郭・トラピスチヌシャトルバス（5系統）+ 市電一日券</b><br><br>
 
                                 <b>📍 今日路線：</b>朝市→トラピスチヌ→五稜郭→駅前→元町/灣區<br><br>
@@ -3934,113 +4551,212 @@
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">07:00</span>
-                            <div class="activity-title">函館朝市早餐</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d6-activity-2">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d6-activity-2')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">07:00</span>
+                                    <div class="activity-title">函館朝市早餐</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🍣 函館朝市（用飯店餐券）</span><br>
                                 <span class="transport-badge">🚶 飯店步行3分鐘</span><br>
                                 海鮮丼、活烏賊丼 | 釣烏賊體驗 ¥500 | ⚠️ 早起因 10:00 退房
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">08:30</span>
-                            <div class="activity-title">回飯店退房</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d6-activity-3">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d6-activity-3')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">08:30</span>
+                                    <div class="activity-title">回飯店退房</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🏨 fav HAKODATE</span><br>
                                 Check-out: 10:00 | 行李寄放飯店
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">09:00</span>
-                            <div class="activity-title">前往トラピスチヌ修道院</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d6-activity-4">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d6-activity-4')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">09:00</span>
+                                    <div class="activity-title">前往トラピスチヌ修道院</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚌 5系統シャトルバス ¥500</span><br>
                                 函館駅前4號乘車處→トラピスチヌ前（37分鐘）
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">09:45</span>
-                            <div class="activity-title">トラピスチヌ修道院</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d6-activity-5">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d6-activity-5')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">09:45</span>
+                                    <div class="activity-title">トラピスチヌ修道院</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">⛪ 天使聖母トラピスチヌ修道院</span><br>
                                 日本第一座女子修道院（1898年）| 門票：免費 | 參觀：30-45分鐘<br>
                                 法國哥德式紅磚建築 | 必買：修道院奶油糖 ¥500、手工餅乾 ¥800
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">11:00</span>
-                            <div class="activity-title">前往五稜郭</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d6-activity-6">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d6-activity-6')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">11:00</span>
+                                    <div class="activity-title">前往五稜郭</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚌 5系統シャトルバス ¥400</span><br>
                                 トラピスチヌ前→五稜郭タワー前（24分鐘）
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">11:30</span>
-                            <div class="activity-title">五稜郭塔</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d6-activity-7">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d6-activity-7')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">11:30</span>
+                                    <div class="activity-title">五稜郭塔</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">⭐ 五稜郭タワー</span><br>
                                 門票：¥1,000 | 參觀：30-40分鐘<br>
                                 俯瞰完整星形要塞 | 360度函館市景、函館山 | 展望台咖啡廳
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">12:30</span>
-                            <div class="activity-title">午餐：幸運小丑漢堡</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d6-activity-8">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d6-activity-8')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">12:30</span>
+                                    <div class="activity-title">午餐：幸運小丑漢堡</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🍔 ラッキーピエロ 五稜郭公園前店</span><br>
                                 預算：¥1,200-1,500/人 | 推薦：中華炸雞漢堡<br>
                                 步行3分鐘 | 午餐時段排隊 10-20 分鐘
                             </div>
                         </div>
-                        
-                        <div class="timeline-item">
-                            <span class="time-badge">14:00</span>
-                            <div class="activity-title">返回函館駅前</div>
-                            <div class="activity-detail">
+
+                        <div class="timeline-item" data-item-id="d6-activity-9">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d6-activity-9')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">14:00</span>
+                                    <div class="activity-title">返回函館駅前</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚋 市電一日券</span><br>
                                 五稜郭公園前→函館駅前（15分鐘）
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">14:30</span>
-                            <div class="activity-title">飯店休息</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d6-activity-10">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d6-activity-10')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">14:30</span>
+                                    <div class="activity-title">飯店休息</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 回 fav HAKODATE 休息 | 下午休息時間 | 今晚續住同一飯店
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">16:00</span>
-                            <div class="activity-title">函館站周邊</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d6-activity-11">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d6-activity-11')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">16:00</span>
+                                    <div class="activity-title">函館站周邊</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚶 飯店步行即可</span><br>
                                 函館駅前百貨（棒二森屋）| 或繼續飯店休息
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">18:00</span>
-                            <div class="activity-title">晚餐：海鮮居酒屋</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d6-activity-12">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d6-activity-12')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">18:00</span>
+                                    <div class="activity-title">晚餐：海鮮居酒屋</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🦀 函館海鮮居酒屋 海光房</span><br>
                                 預算：¥4,000-5,000/人 | 📞 0138-24-1010<br>
                                 活烏賊造身、帆立貝、毛蟹 | 💡 詳見美食分頁
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">20:00</span>
-                            <div class="activity-title">返回飯店</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d6-activity-13">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d6-activity-13')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">20:00</span>
+                                    <div class="activity-title">返回飯店</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 整理行李準備明早退房 | ⏰ 明早 10:00 前退房，09:15 搭 JR 回札幌<br>
                                 確認 JR Pass 還有 1 天效期（Day 7 最後一天）
                             </div>
@@ -4093,10 +4809,18 @@
                     </div>
 
                     <div class="timeline">
-                        <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
-                            <span class="time-badge" style="background: #2196f3;">🎫</span>
-                            <div class="activity-title">Day 7 交通安排</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d7-activity-1" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d7-activity-1')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge" style="background: #2196f3;">🎫</span>
+                                    <div class="activity-title">Day 7 交通安排</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <b style="color: #1976d2;">✅ 使用 JR Pass 5日券（第5天，最後1天）</b><br><br>
 
                                 <b>📍 今日路線：</b>函館→新札幌（直達）<br><br>
@@ -4107,85 +4831,158 @@
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">07:30</span>
-                            <div class="activity-title">飯店早餐 & 退房</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d7-activity-2">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d7-activity-2')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">07:30</span>
+                                    <div class="activity-title">飯店早餐 & 退房</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 快速用餐 | fav HAKODATE check-out | 拖行李到函館站（10分鐘）
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">09:18</span>
-                            <div class="activity-title">搭車回新札幌</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d7-activity-3">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d7-activity-3')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">09:18</span>
+                                    <div class="activity-title">搭車回新札幌</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚃 特急北斗6號</span><br>
                                 函館→新札幌（直達），3h30m | 建議買站內便當上車吃<br>
                                 ⚠️ 在新札幌站下車（札幌站前一站）| JR Pass 最後使用日
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">12:50</span>
-                            <div class="activity-title">抵達新札幌→飯店Check-in</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d7-activity-4">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d7-activity-4')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">12:50</span>
+                                    <div class="activity-title">抵達新札幌→飯店Check-in</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🏨 ホテルエミシア札幌</span><br>
                                 📞 011-895-8811 | 31層飯店<br>
                                 步行3分鐘 | 31樓景觀餐廳 | 大浴場溫泉 | 車站直結商場 | 明早去機場28分鐘
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">13:40</span>
-                            <div class="activity-title">午餐：新札幌美食</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d7-activity-5">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d7-activity-5')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">13:40</span>
+                                    <div class="activity-title">午餐：新札幌美食</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🍚 小松水產（海鮮丼）¥990</span> | <span class="food-badge">🍗 三ツ星ザンギ ¥1,000</span> | <span class="food-badge">🍔 Chicken Pecker ¥960</span><br>
                                 📍 サンピアザ地下 或 Duo-1 內 | 車站商圈，無需預約
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">15:00</span>
-                            <div class="activity-title">新札幌購物時光</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d7-activity-6">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d7-activity-6')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">15:00</span>
+                                    <div class="activity-title">新札幌購物時光</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚶 車站直結</span><br>
                                 サンピアザ：130間店、AEON超市、藥妝店、北海道特產<br>
                                 Duo-1/2：UNIQLO、GU、無印良品
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">16:30</span>
-                            <div class="activity-title">サンピアザ水族館（選擇性）</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d7-activity-7">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d7-activity-7')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">16:30</span>
+                                    <div class="activity-title">サンピアザ水族館（選擇性）</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🐟 新さっぽろサンピアザ水族館</span><br>
                                 門票：¥1,000 | 10:00-18:30 | 約200種生物 | 參觀1小時<br>
                                 💡 或繼續購物、回飯店泡溫泉
                             </div>
                         </div>
-                        
-                        <div class="timeline-item">
-                            <span class="time-badge">17:30</span>
-                            <div class="activity-title">飯店休息</div>
-                            <div class="activity-detail">
+
+                        <div class="timeline-item" data-item-id="d7-activity-8">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d7-activity-8')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">17:30</span>
+                                    <div class="activity-title">飯店休息</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 回房放戰利品 | 泡大浴場溫泉（6F）| 健身房、游泳池、Lobby咖啡廳
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">19:00</span>
-                            <div class="activity-title">最後晚餐</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d7-activity-9">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d7-activity-9')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">19:00</span>
+                                    <div class="activity-title">最後晚餐</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🌃 飯店31樓景觀餐廳 ¥3,000-5,000</span>（推薦，可看夜景）<br>
                                 <span class="food-badge">🍺 宴や 紀らく ¥3,000-4,000</span> | <span class="food-badge">🍽️ 商場內餐廳 ¥1,500-2,500</span><br>
                                 💡 推薦飯店餐廳，用餐後直接回房
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">21:00</span>
-                            <div class="activity-title">最後採購＆休息</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d7-activity-10">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d7-activity-10')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">21:00</span>
+                                    <div class="activity-title">最後採購＆休息</div>
+                                    <span class="importance-badge importance-recommend">⭐⭐ 推薦</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 AEON超市買零食 | 藥妝店最後補貨 | 便利商店買明天早餐<br>
                                 整理行李 | 確認ICOCA餘額 | 檢查護照、機票<br>
                                 ⚠️ 明早 07:00 退房，07:30 搭 JR 快速 Airport（28分鐘，約 ¥800-900）
@@ -4239,10 +5036,18 @@
                     </div>
 
                     <div class="timeline">
-                        <div class="timeline-item" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
-                            <span class="time-badge" style="background: #2196f3;">🎫</span>
-                            <div class="activity-title">Day 8 交通安排</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d8-activity-1" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d8-activity-1')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge" style="background: #2196f3;">🎫</span>
+                                    <div class="activity-title">Day 8 交通安排</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <b style="color: #1976d2;">💳 使用 ICOCA 卡</b><br><br>
 
                                 <b>📍 今日路線：</b>新札幌→新千歲機場<br><br>
@@ -4252,77 +5057,151 @@
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">06:30</span>
-                            <div class="activity-title">起床整理 & 退房</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d8-activity-2">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d8-activity-2')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">06:30</span>
+                                    <div class="activity-title">起床整理 & 退房</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 檢查行李 | 護照、機票確認 | 確認ICOCA餘額 | 07:00 飯店退房
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">07:30</span>
-                            <div class="activity-title">前往機場</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d8-activity-3">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d8-activity-3')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">07:30</span>
+                                    <div class="activity-title">前往機場</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="transport-badge">🚃 JR快速Airport（用ICOCA）</span><br>
                                 新札幌站→新千歲機場，28分鐘 | 比札幌站快10分鐘、便宜 ¥300
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">08:30</span>
-                            <div class="activity-title">抵達機場</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d8-activity-4">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d8-activity-4')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">08:30</span>
+                                    <div class="activity-title">抵達機場</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 國際線4樓 | 退稅櫃檯（如需要）
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">09:00</span>
-                            <div class="activity-title">辦理登機</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d8-activity-5">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d8-activity-5')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">09:00</span>
+                                    <div class="activity-title">辦理登機</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 虎航櫃檯 check-in | 託運行李（20kg/人）| 拿登機證
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">09:30</span>
-                            <div class="activity-title">最後血拼</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d8-activity-6">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d8-activity-6')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">09:30</span>
+                                    <div class="activity-title">最後血拼</div>
+                                    <span class="importance-badge importance-must">⭐⭐⭐ 必訪</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 <span class="food-badge">🎁 必買伴手禮</span><br>
                                 白色戀人 | 六花亭葡萄餅 | Royce生巧克力（需冷藏）| 薯條三兄弟 | LeTAO起司蛋糕<br>
                                 拉麵道場（國內線3F）| 北海道牛奶霜淇淋 | 機場便當
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">10:30</span>
-                            <div class="activity-title">通關出境</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d8-activity-7">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d8-activity-7')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">10:30</span>
+                                    <div class="activity-title">通關出境</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 安檢（液體100ml內）| 出境審查 | 前往登機門
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">11:00</span>
-                            <div class="activity-title">免稅店</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d8-activity-8">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d8-activity-8')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">11:00</span>
+                                    <div class="activity-title">免稅店</div>
+                                    <span class="importance-badge importance-recommend">⭐⭐ 推薦</span>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 限定KitKat | 美瑛選果果醬 | 北海道牛奶餅乾 | 免稅價比市區便宜 5-10%
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">12:05</span>
-                            <div class="activity-title">起飛返台</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d8-activity-9">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d8-activity-9')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">12:05</span>
+                                    <div class="activity-title">起飛返台</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 航班：IT235 | 飛行時間：4小時45分
                             </div>
                         </div>
 
-                        <div class="timeline-item">
-                            <span class="time-badge">15:50</span>
-                            <div class="activity-title">抵達桃園機場</div>
-                            <div class="activity-detail">
+                        <div class="timeline-item" data-item-id="d8-activity-10">
+                            <div class="timeline-header" onclick="toggleTimelineDetail('d8-activity-10')">
+                                <div class="timeline-basic">
+                                    <span class="time-badge">15:50</span>
+                                    <div class="activity-title">抵達桃園機場</div>
+                                </div>
+                                <button class="timeline-expand-btn" onclick="event.stopPropagation()">
+                                    <span>詳情</span>
+                                    <span class="icon">▼</span>
+                                </button>
+                            </div>
+                            <div class="timeline-detail">
                                 入境審查 | 領取行李 | 通關入境 | 🏠 平安到家！
                             </div>
                         </div>
@@ -5015,6 +5894,9 @@
 
             // 載入餐廳卡片摺疊狀態
             loadRestaurantStates();
+
+            // 載入時間軸摺疊狀態
+            loadTimelineStates();
 
             // 為所有checkbox添加事件監聽
             const checkboxes = document.querySelectorAll('.checkbox');
@@ -5769,6 +6651,42 @@
                         const btn = card.querySelector('.restaurant-expand-btn span:first-child');
                         if (btn) {
                             btn.textContent = '收起詳情';
+                        }
+                    }
+                }
+            });
+        }
+
+        // ==================== 時間軸摺疊功能 ====================
+
+        function toggleTimelineDetail(itemId) {
+            const item = document.querySelector(`.timeline-item[data-item-id="${itemId}"]`);
+            if (!item) return;
+
+            const isExpanded = item.classList.toggle('expanded');
+
+            // 更新按鈕文字
+            const btn = item.querySelector('.timeline-expand-btn span:first-child');
+            if (btn) {
+                btn.textContent = isExpanded ? '收起' : '詳情';
+            }
+
+            // 保存狀態到 localStorage
+            const states = JSON.parse(localStorage.getItem('timelineStates') || '{}');
+            states[itemId] = isExpanded;
+            localStorage.setItem('timelineStates', JSON.stringify(states));
+        }
+
+        function loadTimelineStates() {
+            const states = JSON.parse(localStorage.getItem('timelineStates') || '{}');
+            Object.keys(states).forEach(itemId => {
+                if (states[itemId]) {
+                    const item = document.querySelector(`.timeline-item[data-item-id="${itemId}"]`);
+                    if (item) {
+                        item.classList.add('expanded');
+                        const btn = item.querySelector('.timeline-expand-btn span:first-child');
+                        if (btn) {
+                            btn.textContent = '收起';
                         }
                     }
                 }
