@@ -865,7 +865,230 @@
             font-size: 12px;
             margin: 5px 0;
         }
-        
+
+        /* 關鍵提醒標記系統 */
+        .alert-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 3px 5px 3px 0;
+            border: 2px solid;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+        }
+
+        /* 時間敏感 */
+        .alert-time-critical {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+
+        /* 必須預約 */
+        .alert-booking {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        /* 重要費用 */
+        .alert-cost {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+
+        /* 一般提醒 */
+        .alert-info {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        /* 警告 */
+        .alert-warning {
+            background: #fff3e0;
+            border-color: #ff9800;
+            color: #e65100;
+        }
+
+        /* 浮動提醒按鈕 */
+        .floating-alerts-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(238, 90, 111, 0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            z-index: 999;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .floating-alerts-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(238, 90, 111, 0.6);
+        }
+
+        .floating-alerts-btn .badge-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #fff;
+            color: #ff6b6b;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ff6b6b;
+        }
+
+        /* 提醒面板 */
+        .alerts-panel {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 380px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .alerts-panel.show {
+            right: 0;
+        }
+
+        .alerts-panel-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .alerts-panel-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .alerts-panel-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .alerts-panel-content {
+            padding: 20px;
+        }
+
+        .alert-group {
+            margin-bottom: 25px;
+        }
+
+        .alert-group-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .alert-item {
+            background: #f8f9fa;
+            border-left: 4px solid;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-size: 13px;
+            line-height: 1.6;
+            transition: all 0.2s ease;
+        }
+
+        .alert-item:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .alert-item.time-critical {
+            border-left-color: #ffc107;
+            background: #fffbf0;
+        }
+
+        .alert-item.booking {
+            border-left-color: #dc3545;
+            background: #fff5f5;
+        }
+
+        .alert-item.cost {
+            border-left-color: #17a2b8;
+            background: #f0f9fb;
+        }
+
+        .alert-item.info {
+            border-left-color: #28a745;
+            background: #f0fdf4;
+        }
+
+        .alert-item-day {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        /* 面板背景遮罩 */
+        .alerts-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .alerts-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .tip-box {
             background: var(--tip-bg);
             border-left: 4px solid var(--tip-border);
@@ -1599,6 +1822,35 @@
 
             .timeline-control-btn {
                 width: 100%;
+            }
+
+            /* 提醒面板手機版適配 */
+            .alerts-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .floating-alerts-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .floating-alerts-btn .badge-count {
+                width: 20px;
+                height: 20px;
+                font-size: 10px;
+            }
+
+            .summary-items {
+                gap: 6px;
+            }
+
+            .summary-item {
+                font-size: 12px;
+                padding: 5px 10px;
             }
         }
 
@@ -5276,6 +5528,245 @@
 
             document.body.removeChild(textArea);
         }
+    </script>
+
+    <!-- 浮動提醒按鈕 -->
+    <button class="floating-alerts-btn" onclick="toggleAlertsPanel()" aria-label="關鍵提醒">
+        🔔
+        <span class="badge-count" id="alertsCount">0</span>
+    </button>
+
+    <!-- 背景遮罩 -->
+    <div class="alerts-overlay" id="alertsOverlay" onclick="closeAlertsPanel()"></div>
+
+    <!-- 提醒側邊面板 -->
+    <div class="alerts-panel" id="alertsPanel">
+        <div class="alerts-panel-header">
+            <div class="alerts-panel-title">⚠️ 關鍵提醒</div>
+            <button class="alerts-panel-close" onclick="closeAlertsPanel()" aria-label="關閉">×</button>
+        </div>
+        <div class="alerts-panel-content" id="alertsPanelContent">
+            <!-- 動態生成內容 -->
+        </div>
+    </div>
+
+    <script>
+        // ==================== 關鍵提醒系統 ====================
+
+        const keyAlerts = {
+            day1: {
+                timeCritical: [
+                    '05:00 從家出發去機場',
+                    'かに將軍建議 17:30 預約'
+                ],
+                booking: [
+                    'かに將軍需提前預約'
+                ],
+                cost: [
+                    '機場購買 ICOCA ¥2,000',
+                    'JR Pass ¥22,000'
+                ],
+                info: [
+                    '狸小路商店街營業至 21:00'
+                ]
+            },
+            day2: {
+                timeCritical: [
+                    '購買ドニチカキップ ¥520（週日券）',
+                    '札幌電視塔營業至 21:00'
+                ],
+                cost: [
+                    '白色戀人公園 ¥800',
+                    '圓山神宮巴士 ¥210'
+                ],
+                info: [
+                    '達摩成吉思汗烤肉無需預約'
+                ]
+            },
+            day3: {
+                timeCritical: [
+                    'JR Pass 今日開始使用（第1天）',
+                    '12:30 前務必回小樽站',
+                    '13:42 搭特急北斗往洞爺'
+                ],
+                booking: [
+                    '午餐建議 11:00 前抵達避開人潮'
+                ],
+                cost: [
+                    '洞爺湖飯店無接駁車',
+                    '巴士 ¥340 或計程車 ¥2,000-3,000'
+                ],
+                info: [
+                    '六花亭現烤餅免費（每人限2個）',
+                    '煙火 20:45（10月下旬可能已結束）'
+                ]
+            },
+            day4: {
+                timeCritical: [
+                    'JR Pass 今日休息不使用'
+                ],
+                cost: [
+                    '有珠山纜車 ¥1,800',
+                    '洞爺湖遊覽船 ¥1,500',
+                    '巴士班次少，注意時刻表'
+                ],
+                info: [
+                    '煙火 20:45（10月下旬可能已結束）',
+                    '可請飯店協助查詢巴士時刻'
+                ]
+            },
+            day5: {
+                timeCritical: [
+                    '11:00 退房',
+                    '特急北斗 12:12 往函館',
+                    '16:30 日落，提早上函館山'
+                ],
+                cost: [
+                    '函館市電一日券 ¥600',
+                    '函館山纜車 ¥1,500'
+                ],
+                booking: [
+                    '函館山週末大排隊，建議提早'
+                ],
+                info: [
+                    'JR Pass 第3天'
+                ]
+            },
+            day6: {
+                timeCritical: [
+                    '函館朝市 06:00 營業',
+                    '10:00 退房'
+                ],
+                cost: [
+                    '市電一日券 ¥600'
+                ],
+                info: [
+                    '教堂區免費參觀',
+                    '大門橫丁晚餐'
+                ]
+            },
+            day7: {
+                timeCritical: [
+                    '08:30 退房',
+                    '特急北斗 09:03 返札幌',
+                    'JR Pass 最後一天（第5天）'
+                ],
+                cost: [
+                    '白色戀人公園 ¥800'
+                ],
+                info: [
+                    '狸小路最後採購機會'
+                ]
+            },
+            day8: {
+                timeCritical: [
+                    '07:00 退房',
+                    'JR 快速 07:30 往機場',
+                    '預留2小時，13:30 起飛'
+                ],
+                cost: [
+                    '機場快線 ¥1,170 或 ICOCA'
+                ],
+                info: [
+                    '機場最後採購伴手禮'
+                ]
+            }
+        };
+
+        function toggleAlertsPanel() {
+            const panel = document.getElementById('alertsPanel');
+            const overlay = document.getElementById('alertsOverlay');
+
+            if (panel.classList.contains('show')) {
+                closeAlertsPanel();
+            } else {
+                panel.classList.add('show');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeAlertsPanel() {
+            const panel = document.getElementById('alertsPanel');
+            const overlay = document.getElementById('alertsOverlay');
+
+            panel.classList.remove('show');
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function initAlertsPanel() {
+            const content = document.getElementById('alertsPanelContent');
+            let totalCount = 0;
+            let html = '';
+
+            // 生成所有天的提醒
+            Object.keys(keyAlerts).forEach(dayKey => {
+                const dayNum = dayKey.replace('day', '');
+                const alerts = keyAlerts[dayKey];
+                const dayTitle = `Day ${dayNum}`;
+
+                let dayHtml = `<div class="alert-group">
+                    <div class="alert-group-title">📅 ${dayTitle}</div>`;
+
+                // 時間敏感提醒
+                if (alerts.timeCritical && alerts.timeCritical.length > 0) {
+                    alerts.timeCritical.forEach(alert => {
+                        dayHtml += `<div class="alert-item time-critical">
+                            <div class="alert-item-day">⏰ 時間敏感</div>
+                            ${alert}
+                        </div>`;
+                        totalCount++;
+                    });
+                }
+
+                // 必須預約
+                if (alerts.booking && alerts.booking.length > 0) {
+                    alerts.booking.forEach(alert => {
+                        dayHtml += `<div class="alert-item booking">
+                            <div class="alert-item-day">📝 必須預約</div>
+                            ${alert}
+                        </div>`;
+                        totalCount++;
+                    });
+                }
+
+                // 重要費用
+                if (alerts.cost && alerts.cost.length > 0) {
+                    alerts.cost.forEach(alert => {
+                        dayHtml += `<div class="alert-item cost">
+                            <div class="alert-item-day">💰 重要費用</div>
+                            ${alert}
+                        </div>`;
+                        totalCount++;
+                    });
+                }
+
+                // 一般資訊
+                if (alerts.info && alerts.info.length > 0) {
+                    alerts.info.forEach(alert => {
+                        dayHtml += `<div class="alert-item info">
+                            <div class="alert-item-day">ℹ️ 重要資訊</div>
+                            ${alert}
+                        </div>`;
+                        totalCount++;
+                    });
+                }
+
+                dayHtml += `</div>`;
+                html += dayHtml;
+            });
+
+            content.innerHTML = html;
+
+            // 更新計數
+            document.getElementById('alertsCount').textContent = totalCount;
+        }
+
+        // 頁面載入時初始化提醒面板
+        document.addEventListener('DOMContentLoaded', function() {
+            initAlertsPanel();
+        });
     </script>
 </body>
 </html>
