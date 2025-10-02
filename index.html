@@ -1960,6 +1960,92 @@
             box-shadow: 0 8px 16px var(--shadow-color);
         }
 
+        /* 餐廳卡片摺疊功能 */
+        .restaurant-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+            margin-bottom: 10px;
+        }
+
+        .restaurant-basic-info {
+            flex: 1;
+        }
+
+        .restaurant-expand-btn {
+            background: var(--schedule-primary);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .restaurant-expand-btn:hover {
+            background: var(--schedule-dark);
+            transform: scale(1.05);
+        }
+
+        .restaurant-expand-btn .icon {
+            transition: transform 0.3s ease;
+        }
+
+        .restaurant-card.expanded .restaurant-expand-btn .icon {
+            transform: rotate(180deg);
+        }
+
+        .restaurant-detail {
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .restaurant-card.expanded .restaurant-detail {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 10px;
+        }
+
+        .restaurant-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .restaurant-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            color: var(--text-color);
+        }
+
+        .restaurant-tag.booking-required {
+            background: rgba(220, 53, 69, 0.1);
+            border-color: rgba(220, 53, 69, 0.3);
+            color: #dc3545;
+        }
+
+        .restaurant-tag.no-booking {
+            background: rgba(40, 167, 69, 0.1);
+            border-color: rgba(40, 167, 69, 0.3);
+            color: #28a745;
+        }
+
         button {
             position: relative;
             overflow: hidden;
@@ -4326,9 +4412,20 @@
                 </div>
                 
                 <div class="restaurant-card" data-item-id="restaurant-ramen-yokocho">
-                    <div class="restaurant-name">🍜 拉麵橫丁</div>
-                    <span class="restaurant-type">拉麵</span>
-                    <span class="price-range">¥¥</span>
+                    <div class="restaurant-card-header" onclick="toggleRestaurantDetail('restaurant-ramen-yokocho')">
+                        <div class="restaurant-basic-info">
+                            <div class="restaurant-name">🍜 拉麵橫丁</div>
+                            <div class="restaurant-summary">
+                                <span class="restaurant-type">拉麵</span>
+                                <span class="price-range">¥¥</span>
+                                <span class="restaurant-tag no-booking">✅ 無需預約</span>
+                            </div>
+                        </div>
+                        <button class="restaurant-expand-btn" onclick="event.stopPropagation()">
+                            <span>查看詳情</span>
+                            <span class="icon">▼</span>
+                        </button>
+                    </div>
                     <div class="restaurant-detail">
                         📍 薄野5-6丁目<br>
                         ⏰ 11:00-03:00<br>
@@ -4339,9 +4436,20 @@
                 </div>
 
                 <div class="restaurant-card" data-item-id="restaurant-kani-shogun">
-                    <div class="restaurant-name">🦀 かに將軍</div>
-                    <span class="restaurant-type">螃蟹料理</span>
-                    <span class="price-range">¥¥¥¥</span>
+                    <div class="restaurant-card-header" onclick="toggleRestaurantDetail('restaurant-kani-shogun')">
+                        <div class="restaurant-basic-info">
+                            <div class="restaurant-name">🦀 かに將軍</div>
+                            <div class="restaurant-summary">
+                                <span class="restaurant-type">螃蟹料理</span>
+                                <span class="price-range">¥¥¥¥</span>
+                                <span class="restaurant-tag booking-required">⚠️ 必須預約</span>
+                            </div>
+                        </div>
+                        <button class="restaurant-expand-btn" onclick="event.stopPropagation()">
+                            <span>查看詳情</span>
+                            <span class="icon">▼</span>
+                        </button>
+                    </div>
                     <div class="restaurant-detail">
                         📍 薄野4-2-6<br>
                         ⏰ 11:30-22:00<br>
@@ -4353,9 +4461,20 @@
                 </div>
                 
                 <div class="restaurant-card" data-item-id="restaurant-donburi-chaya">
-                    <div class="restaurant-name">🍱 海鮮處どんぶり茶屋</div>
-                    <span class="restaurant-type">海鮮丼</span>
-                    <span class="price-range">¥¥¥</span>
+                    <div class="restaurant-card-header" onclick="toggleRestaurantDetail('restaurant-donburi-chaya')">
+                        <div class="restaurant-basic-info">
+                            <div class="restaurant-name">🍱 海鮮處どんぶり茶屋</div>
+                            <div class="restaurant-summary">
+                                <span class="restaurant-type">海鮮丼</span>
+                                <span class="price-range">¥¥¥</span>
+                                <span class="restaurant-tag no-booking">✅ 無需預約</span>
+                            </div>
+                        </div>
+                        <button class="restaurant-expand-btn" onclick="event.stopPropagation()">
+                            <span>查看詳情</span>
+                            <span class="icon">▼</span>
+                        </button>
+                    </div>
                     <div class="restaurant-detail">
                         📍 札幌二条市場內<br>
                         ⏰ 07:00-17:00<br>
@@ -4366,9 +4485,20 @@
                 </div>
 
                 <div class="restaurant-card" data-item-id="restaurant-daruma">
-                    <div class="restaurant-name">🍖 成吉思汗達摩</div>
-                    <span class="restaurant-type">烤羊肉</span>
-                    <span class="price-range">¥¥¥</span>
+                    <div class="restaurant-card-header" onclick="toggleRestaurantDetail('restaurant-daruma')">
+                        <div class="restaurant-basic-info">
+                            <div class="restaurant-name">🍖 成吉思汗達摩</div>
+                            <div class="restaurant-summary">
+                                <span class="restaurant-type">烤羊肉</span>
+                                <span class="price-range">¥¥¥</span>
+                                <span class="restaurant-tag no-booking">✅ 無需預約</span>
+                            </div>
+                        </div>
+                        <button class="restaurant-expand-btn" onclick="event.stopPropagation()">
+                            <span>查看詳情</span>
+                            <span class="icon">▼</span>
+                        </button>
+                    </div>
                     <div class="restaurant-detail">
                         📍 薄野有多間分店<br>
                         ⏰ 17:00-03:00<br>
@@ -4379,9 +4509,20 @@
                 </div>
 
                 <div class="restaurant-card" data-item-id="restaurant-nemuro-hanamaru">
-                    <div class="restaurant-name">🍣 根室花丸</div>
-                    <span class="restaurant-type">迴轉壽司</span>
-                    <span class="price-range">¥¥¥</span>
+                    <div class="restaurant-card-header" onclick="toggleRestaurantDetail('restaurant-nemuro-hanamaru')">
+                        <div class="restaurant-basic-info">
+                            <div class="restaurant-name">🍣 根室花丸</div>
+                            <div class="restaurant-summary">
+                                <span class="restaurant-type">迴轉壽司</span>
+                                <span class="price-range">¥¥¥</span>
+                                <span class="restaurant-tag no-booking">✅ 無需預約</span>
+                            </div>
+                        </div>
+                        <button class="restaurant-expand-btn" onclick="event.stopPropagation()">
+                            <span>查看詳情</span>
+                            <span class="icon">▼</span>
+                        </button>
+                    </div>
                     <div class="restaurant-detail">
                         📍 KITTE札幌6F<br>
                         ⏰ 11:00-22:00<br>
@@ -4392,9 +4533,20 @@
                 </div>
 
                 <div class="restaurant-card" data-item-id="restaurant-masa-sushi">
-                    <div class="restaurant-name">🍣 政壽司</div>
-                    <span class="restaurant-type">壽司</span>
-                    <span class="price-range">¥¥¥¥</span>
+                    <div class="restaurant-card-header" onclick="toggleRestaurantDetail('restaurant-masa-sushi')">
+                        <div class="restaurant-basic-info">
+                            <div class="restaurant-name">🍣 政壽司</div>
+                            <div class="restaurant-summary">
+                                <span class="restaurant-type">壽司</span>
+                                <span class="price-range">¥¥¥¥</span>
+                                <span class="restaurant-tag booking-required">📝 建議預約</span>
+                            </div>
+                        </div>
+                        <button class="restaurant-expand-btn" onclick="event.stopPropagation()">
+                            <span>查看詳情</span>
+                            <span class="icon">▼</span>
+                        </button>
+                    </div>
                     <div class="restaurant-detail">
                         📍 小樽花園1-1<br>
                         ⏰ 11:00-21:00（週三休）<br>
@@ -4406,9 +4558,20 @@
                 </div>
 
                 <div class="restaurant-card" data-item-id="restaurant-lucky-pierrot">
-                    <div class="restaurant-name">🍔 幸運小丑漢堡</div>
-                    <span class="restaurant-type">速食</span>
-                    <span class="price-range">¥</span>
+                    <div class="restaurant-card-header" onclick="toggleRestaurantDetail('restaurant-lucky-pierrot')">
+                        <div class="restaurant-basic-info">
+                            <div class="restaurant-name">🍔 幸運小丑漢堡</div>
+                            <div class="restaurant-summary">
+                                <span class="restaurant-type">速食</span>
+                                <span class="price-range">¥</span>
+                                <span class="restaurant-tag no-booking">✅ 無需預約</span>
+                            </div>
+                        </div>
+                        <button class="restaurant-expand-btn" onclick="event.stopPropagation()">
+                            <span>查看詳情</span>
+                            <span class="icon">▼</span>
+                        </button>
+                    </div>
                     <div class="restaurant-detail">
                         📍 函館限定（17間分店）<br>
                         ⏰ 10:00-00:00<br>
@@ -4419,9 +4582,20 @@
                 </div>
                 
                 <div class="restaurant-card" data-item-id="restaurant-kantaro">
-                    <div class="restaurant-name">🍣 函太郎</div>
-                    <span class="restaurant-type">迴轉壽司</span>
-                    <span class="price-range">¥¥¥</span>
+                    <div class="restaurant-card-header" onclick="toggleRestaurantDetail('restaurant-kantaro')">
+                        <div class="restaurant-basic-info">
+                            <div class="restaurant-name">🍣 函太郎</div>
+                            <div class="restaurant-summary">
+                                <span class="restaurant-type">迴轉壽司</span>
+                                <span class="price-range">¥¥¥</span>
+                                <span class="restaurant-tag no-booking">✅ 無需預約</span>
+                            </div>
+                        </div>
+                        <button class="restaurant-expand-btn" onclick="event.stopPropagation()">
+                            <span>查看詳情</span>
+                            <span class="icon">▼</span>
+                        </button>
+                    </div>
                     <div class="restaurant-detail">
                         📍 函館宇賀浦町<br>
                         ⏰ 11:00-21:00<br>
@@ -4433,9 +4607,20 @@
                 </div>
 
                 <div class="restaurant-card" data-item-id="restaurant-hakodate-ramen">
-                    <div class="restaurant-name">🍜 函館鹽拉麵</div>
-                    <span class="restaurant-type">拉麵</span>
-                    <span class="price-range">¥¥</span>
+                    <div class="restaurant-card-header" onclick="toggleRestaurantDetail('restaurant-hakodate-ramen')">
+                        <div class="restaurant-basic-info">
+                            <div class="restaurant-name">🍜 函館鹽拉麵</div>
+                            <div class="restaurant-summary">
+                                <span class="restaurant-type">拉麵</span>
+                                <span class="price-range">¥¥</span>
+                                <span class="restaurant-tag no-booking">✅ 無需預約</span>
+                            </div>
+                        </div>
+                        <button class="restaurant-expand-btn" onclick="event.stopPropagation()">
+                            <span>查看詳情</span>
+                            <span class="icon">▼</span>
+                        </button>
+                    </div>
                     <div class="restaurant-detail">
                         📍 函館麵廚房あじさい（五稜郭）<br>
                         ⏰ 11:00-20:00<br>
@@ -4827,6 +5012,9 @@
 
             // 載入checkbox狀態
             loadCheckboxState();
+
+            // 載入餐廳卡片摺疊狀態
+            loadRestaurantStates();
 
             // 為所有checkbox添加事件監聽
             const checkboxes = document.querySelectorAll('.checkbox');
@@ -5551,6 +5739,42 @@
     </div>
 
     <script>
+        // ==================== 餐廳卡片摺疊功能 ====================
+
+        function toggleRestaurantDetail(restaurantId) {
+            const card = document.querySelector(`.restaurant-card[data-item-id="${restaurantId}"]`);
+            if (!card) return;
+
+            const isExpanded = card.classList.toggle('expanded');
+
+            // 更新按鈕文字
+            const btn = card.querySelector('.restaurant-expand-btn span:first-child');
+            if (btn) {
+                btn.textContent = isExpanded ? '收起詳情' : '查看詳情';
+            }
+
+            // 保存狀態到 localStorage
+            const states = JSON.parse(localStorage.getItem('restaurantStates') || '{}');
+            states[restaurantId] = isExpanded;
+            localStorage.setItem('restaurantStates', JSON.stringify(states));
+        }
+
+        function loadRestaurantStates() {
+            const states = JSON.parse(localStorage.getItem('restaurantStates') || '{}');
+            Object.keys(states).forEach(restaurantId => {
+                if (states[restaurantId]) {
+                    const card = document.querySelector(`.restaurant-card[data-item-id="${restaurantId}"]`);
+                    if (card) {
+                        card.classList.add('expanded');
+                        const btn = card.querySelector('.restaurant-expand-btn span:first-child');
+                        if (btn) {
+                            btn.textContent = '收起詳情';
+                        }
+                    }
+                }
+            });
+        }
+
         // ==================== 關鍵提醒系統 ====================
 
         const keyAlerts = {
