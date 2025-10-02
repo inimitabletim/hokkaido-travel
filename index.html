@@ -250,6 +250,216 @@
             background: rgba(255,255,255,0.3);
         }
 
+        /* 分享功能 */
+        .share-button {
+            position: absolute;
+            top: 15px;
+            right: 65px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .share-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .share-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .share-modal.show {
+            display: flex;
+        }
+
+        .share-modal-content {
+            background: var(--container-bg);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .share-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .share-modal-title {
+            font-size: var(--font-size-h2);
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .share-close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .share-close-btn:hover {
+            background: var(--highlight-bg);
+            color: var(--text-color);
+        }
+
+        .share-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .share-option-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--info-bg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: var(--font-size-body);
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .share-option-btn:hover {
+            border-color: var(--schedule-primary);
+            background: var(--schedule-light);
+            transform: translateX(5px);
+        }
+
+        .share-option-icon {
+            font-size: 24px;
+            width: 30px;
+            text-align: center;
+        }
+
+        .share-option-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .share-option-label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .share-option-desc {
+            font-size: var(--font-size-small);
+            color: var(--text-secondary);
+        }
+
+        .share-preview {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--highlight-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .share-preview-title {
+            font-size: var(--font-size-small);
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .share-preview-content {
+            font-size: var(--font-size-small);
+            color: var(--text-color);
+            line-height: var(--line-height-body);
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .share-success {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4ade80;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(74, 222, 128, 0.4);
+            z-index: 10001;
+            animation: slideDown 0.3s ease, slideUp 0.3s ease 2.7s;
+            display: none;
+        }
+
+        .share-success.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translate(-50%, -100%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+
         /* 進度追蹤系統 */
         .progress-container {
             margin-top: 15px;
@@ -916,6 +1126,280 @@
             }
         }
 
+        /* ========== 響應式設計 - 新功能優化 ========== */
+
+        /* 手機版 - 分享功能優化 */
+        @media screen and (max-width: 768px) {
+            .share-button,
+            .theme-toggle {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+
+            .share-button {
+                right: 55px;
+            }
+
+            .share-modal-content {
+                width: 95%;
+                padding: 20px;
+                max-height: 85vh;
+            }
+
+            .share-modal-title {
+                font-size: var(--font-size-h3);
+            }
+
+            .share-option-btn {
+                padding: 12px 15px;
+                gap: 12px;
+            }
+
+            .share-option-icon {
+                font-size: 20px;
+            }
+
+            .share-option-label {
+                font-size: var(--font-size-body);
+            }
+
+            .share-option-desc {
+                font-size: var(--font-size-tiny);
+            }
+
+            .share-preview-content {
+                font-size: var(--font-size-tiny);
+                max-height: 150px;
+            }
+        }
+
+        /* 手機版 - 搜尋與過濾優化 */
+        @media screen and (max-width: 768px) {
+            .search-container {
+                padding: 12px;
+                margin: -20px -20px 15px -20px;
+            }
+
+            .search-input {
+                padding: 10px 35px 10px 12px;
+                font-size: var(--font-size-small);
+            }
+
+            .clear-search {
+                right: 10px;
+                font-size: 18px;
+            }
+
+            .filter-container {
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+
+            .filter-btn {
+                padding: 8px 12px;
+                font-size: var(--font-size-small);
+                flex: 1;
+                min-width: calc(50% - 4px);
+            }
+
+            .search-results-info {
+                font-size: var(--font-size-tiny);
+                padding: 6px 10px;
+            }
+        }
+
+        /* 手機版 - 收藏與筆記優化 */
+        @media screen and (max-width: 768px) {
+            .item-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .favorite-btn,
+            .note-btn {
+                width: 100%;
+                justify-content: center;
+                font-size: var(--font-size-small);
+            }
+
+            .note-input {
+                font-size: var(--font-size-small);
+                padding: 8px 10px;
+            }
+
+            .note-actions {
+                gap: 8px;
+            }
+
+            .note-save-btn,
+            .note-cancel-btn {
+                padding: 6px 12px;
+                font-size: var(--font-size-small);
+            }
+
+            .note-display {
+                font-size: var(--font-size-small);
+                padding: 8px 10px;
+            }
+        }
+
+        /* 手機版 - 餐廳卡片優化 */
+        @media screen and (max-width: 768px) {
+            .restaurant-card {
+                padding: 15px;
+            }
+
+            .restaurant-name {
+                font-size: var(--font-size-h3);
+            }
+
+            .restaurant-type {
+                font-size: var(--font-size-tiny);
+                padding: 4px 10px;
+            }
+
+            .restaurant-rating {
+                font-size: var(--font-size-small);
+            }
+
+            .restaurant-info {
+                font-size: var(--font-size-small);
+            }
+
+            .restaurant-highlight {
+                font-size: var(--font-size-small);
+                padding: 8px 12px;
+            }
+        }
+
+        /* 小螢幕 - 進一步優化 */
+        @media screen and (max-width: 480px) {
+            .share-button {
+                right: 50px;
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+
+            .theme-toggle {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+
+            .share-modal-content {
+                padding: 15px;
+                border-radius: 15px;
+            }
+
+            .share-option-btn {
+                padding: 10px 12px;
+                border-radius: 10px;
+            }
+
+            .share-success {
+                font-size: var(--font-size-small);
+                padding: 10px 20px;
+                top: 10px;
+            }
+
+            .filter-btn {
+                min-width: 100%;
+                text-align: center;
+            }
+
+            .search-container {
+                margin: -15px -15px 15px -15px;
+                padding: 10px;
+            }
+        }
+
+        /* 平板版 - 優化佈局 */
+        @media screen and (min-width: 768px) and (max-width: 1024px) {
+            .restaurant-card {
+                padding: 20px;
+            }
+
+            .search-container {
+                padding: 15px 20px;
+            }
+
+            .filter-btn {
+                flex: 0 0 auto;
+                min-width: 100px;
+            }
+
+            .item-actions {
+                flex-direction: row;
+            }
+        }
+
+        /* 桌機版 - 分享彈窗置中優化 */
+        @media screen and (min-width: 1024px) {
+            .share-modal-content {
+                max-width: 550px;
+                padding: 35px;
+            }
+
+            .share-option-btn:hover {
+                transform: translateX(8px);
+            }
+        }
+
+        /* 橫向模式優化 (手機橫放) */
+        @media screen and (max-width: 768px) and (orientation: landscape) {
+            .share-modal-content {
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .header {
+                padding: 15px 20px;
+            }
+
+            .day-header {
+                padding: 15px 20px;
+            }
+        }
+
+        /* 高解析度螢幕優化 */
+        @media screen and (min-width: 1440px) {
+            .share-modal-content {
+                max-width: 600px;
+                padding: 40px;
+            }
+
+            .share-option-btn {
+                padding: 18px 24px;
+            }
+
+            .share-option-icon {
+                font-size: 28px;
+            }
+        }
+
+        /* 觸控優化 - 增加點擊區域 */
+        @media (hover: none) and (pointer: coarse) {
+            .share-button,
+            .theme-toggle,
+            .favorite-btn,
+            .note-btn,
+            .filter-btn,
+            .clear-search {
+                min-height: 44px;
+                min-width: 44px;
+            }
+
+            .share-option-btn {
+                min-height: 56px;
+            }
+
+            .nav-tab {
+                min-height: 44px;
+            }
+        }
+
         /* 實用類別 - 處理深色模式 */
         body.dark-mode div[style*="background: white"],
         body.dark-mode div[style*="background: #fff"],
@@ -1165,6 +1649,147 @@
             color: white;
         }
 
+        /* 搜尋與過濾系統 */
+        .search-container {
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            background: var(--container-bg);
+            padding: 15px;
+            border-bottom: 2px solid var(--border-color);
+            box-shadow: 0 2px 8px var(--shadow-color);
+            margin: -20px -20px 20px -20px;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            font-size: 15px;
+            background: var(--info-bg);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--bg-gradient-start);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 5px;
+            display: none;
+            transition: color 0.3s ease;
+        }
+
+        .clear-search:hover {
+            color: var(--text-color);
+        }
+
+        .clear-search.show {
+            display: block;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 6px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            background: var(--info-bg);
+            color: var(--text-color);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--bg-gradient-start);
+            color: var(--bg-gradient-start);
+            transform: translateY(-1px);
+        }
+
+        .filter-btn.active {
+            background: var(--bg-gradient-start);
+            border-color: var(--bg-gradient-start);
+            color: white;
+            font-weight: 600;
+        }
+
+        .search-results-info {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: var(--tip-light);
+            border-left: 3px solid var(--tip-primary);
+            border-radius: 5px;
+            font-size: 13px;
+            display: none;
+        }
+
+        .search-results-info.show {
+            display: block;
+        }
+
+        .highlight {
+            background: #ffeb3b;
+            color: #000;
+            font-weight: 600;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        body.dark-mode .highlight {
+            background: #ffc107;
+            color: #000;
+        }
+
+        .search-no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+        }
+
+        .search-no-results-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
         /* 收藏與筆記系統 */
         .item-actions {
             display: flex;
@@ -1332,6 +1957,9 @@
 <body>
     <div class="container">
         <div class="header">
+            <button class="share-button" onclick="openShareModal()" aria-label="分享旅遊指南">
+                <span>📤</span>
+            </button>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="切換深色模式">
                 <span id="theme-icon">🌙</span>
             </button>
@@ -4249,7 +4877,45 @@
             <!-- 美食總覽 -->
             <div class="section" id="restaurants">
                 <h2>🍽️ 美食推薦總整理</h2>
-                
+
+                <!-- 搜尋與過濾系統 -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <input
+                            type="text"
+                            id="searchInput"
+                            class="search-input"
+                            placeholder="搜尋餐廳名稱、類型或特色..."
+                            oninput="performSearch()"
+                        >
+                        <span class="search-icon" id="searchIcon">🔍</span>
+                        <button class="clear-search" id="clearSearch" onclick="clearSearch()">×</button>
+                    </div>
+
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all" onclick="filterItems('all')">
+                            全部
+                        </button>
+                        <button class="filter-btn" data-filter="拉麵" onclick="filterItems('拉麵')">
+                            🍜 拉麵
+                        </button>
+                        <button class="filter-btn" data-filter="壽司" onclick="filterItems('壽司')">
+                            🍣 壽司
+                        </button>
+                        <button class="filter-btn" data-filter="螃蟹" onclick="filterItems('螃蟹')">
+                            🦀 螃蟹
+                        </button>
+                        <button class="filter-btn" data-filter="海鮮" onclick="filterItems('海鮮')">
+                            🍱 海鮮
+                        </button>
+                        <button class="filter-btn" data-filter="速食" onclick="filterItems('速食')">
+                            🍔 速食
+                        </button>
+                    </div>
+
+                    <div class="search-results-info" id="searchResultsInfo"></div>
+                </div>
+
                 <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 15px; margin-bottom: 20px;">
                     <div style="font-weight: bold; margin-bottom: 10px;">⚠️ 需要預約的餐廳（按優先順序）</div>
                     <div style="font-size: 14px;">
@@ -4593,6 +5259,58 @@
         ↑
     </button>
 
+    <!-- 分享彈窗 -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-modal-content">
+            <div class="share-modal-header">
+                <div class="share-modal-title">📤 分享旅遊指南</div>
+                <button class="share-close-btn" onclick="closeShareModal()" aria-label="關閉">×</button>
+            </div>
+
+            <div class="share-options">
+                <button class="share-option-btn" onclick="shareViaWebAPI()">
+                    <span class="share-option-icon">🔗</span>
+                    <div class="share-option-text">
+                        <span class="share-option-label">快速分享</span>
+                        <span class="share-option-desc">使用系統分享功能（支援行動裝置）</span>
+                    </div>
+                </button>
+
+                <button class="share-option-btn" onclick="copyLink()">
+                    <span class="share-option-icon">📋</span>
+                    <div class="share-option-text">
+                        <span class="share-option-label">複製網址</span>
+                        <span class="share-option-desc">複製此頁面的連結</span>
+                    </div>
+                </button>
+
+                <button class="share-option-btn" onclick="copyTravelSummary()">
+                    <span class="share-option-icon">📝</span>
+                    <div class="share-option-text">
+                        <span class="share-option-label">複製旅遊摘要</span>
+                        <span class="share-option-desc">複製完整行程重點文字</span>
+                    </div>
+                </button>
+
+                <button class="share-option-btn" onclick="copyFavorites()">
+                    <span class="share-option-icon">⭐</span>
+                    <div class="share-option-text">
+                        <span class="share-option-label">複製我的收藏</span>
+                        <span class="share-option-desc">分享你收藏的景點與餐廳</span>
+                    </div>
+                </button>
+            </div>
+
+            <div class="share-preview" id="sharePreview" style="display: none;">
+                <div class="share-preview-title">預覽內容</div>
+                <div class="share-preview-content" id="sharePreviewContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 分享成功提示 -->
+    <div class="share-success" id="shareSuccess">✓ 已複製到剪貼簿</div>
+
     <script>
         function showSection(sectionId) {
             // 隱藏所有section
@@ -4900,6 +5618,368 @@
                     noteBtn.textContent = '📝 已有筆記';
                 }
             });
+        }
+
+        // 搜尋與過濾系統
+        let currentFilter = 'all';
+
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('clearSearch');
+            const resultsInfo = document.getElementById('searchResultsInfo');
+            const searchTerm = searchInput.value.toLowerCase().trim();
+
+            // 顯示/隱藏清除按鈕
+            if (searchTerm.length > 0) {
+                clearBtn.classList.add('show');
+                document.getElementById('searchIcon').style.display = 'none';
+            } else {
+                clearBtn.classList.remove('show');
+                document.getElementById('searchIcon').style.display = 'block';
+            }
+
+            // 獲取所有餐廳卡片
+            const restaurantCards = document.querySelectorAll('.restaurant-card[data-item-id]');
+            let visibleCount = 0;
+
+            restaurantCards.forEach(card => {
+                // 移除之前的高亮
+                removeHighlight(card);
+
+                const text = card.textContent.toLowerCase();
+                const matchesSearch = searchTerm === '' || text.includes(searchTerm);
+                const matchesFilter = currentFilter === 'all' ||
+                    card.querySelector('.restaurant-type')?.textContent.includes(currentFilter);
+
+                if (matchesSearch && matchesFilter) {
+                    card.style.display = 'block';
+                    visibleCount++;
+
+                    // 如果有搜尋詞，高亮匹配的文字
+                    if (searchTerm) {
+                        highlightText(card, searchTerm);
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // 顯示搜尋結果資訊
+            if (searchTerm.length > 0 || currentFilter !== 'all') {
+                resultsInfo.textContent = `找到 ${visibleCount} 間餐廳`;
+                resultsInfo.classList.add('show');
+            } else {
+                resultsInfo.classList.remove('show');
+            }
+
+            // 如果沒有結果，顯示提示
+            updateNoResultsMessage(visibleCount);
+        }
+
+        function highlightText(element, searchTerm) {
+            const name = element.querySelector('.restaurant-name');
+            const detail = element.querySelector('.restaurant-detail');
+
+            if (name) {
+                const originalText = name.textContent;
+                const regex = new RegExp(`(${escapeRegex(searchTerm)})`, 'gi');
+                const highlightedText = originalText.replace(regex, '<span class="highlight">$1</span>');
+                if (highlightedText !== originalText) {
+                    name.innerHTML = highlightedText;
+                }
+            }
+
+            if (detail) {
+                const originalHtml = detail.innerHTML;
+                const regex = new RegExp(`(${escapeRegex(searchTerm)})`, 'gi');
+                const highlightedHtml = originalHtml.replace(regex, '<span class="highlight">$1</span>');
+                if (highlightedHtml !== originalHtml) {
+                    detail.innerHTML = highlightedHtml;
+                }
+            }
+        }
+
+        function removeHighlight(element) {
+            const highlights = element.querySelectorAll('.highlight');
+            highlights.forEach(highlight => {
+                const text = highlight.textContent;
+                highlight.replaceWith(text);
+            });
+        }
+
+        function escapeRegex(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function clearSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.value = '';
+            performSearch();
+            searchInput.focus();
+        }
+
+        function filterItems(filterType) {
+            currentFilter = filterType;
+
+            // 更新按鈕狀態
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-filter') === filterType) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // 執行搜尋（會考慮當前的過濾條件）
+            performSearch();
+        }
+
+        function updateNoResultsMessage(visibleCount) {
+            const section = document.getElementById('restaurants');
+            let noResultsDiv = section.querySelector('.search-no-results');
+
+            if (visibleCount === 0) {
+                if (!noResultsDiv) {
+                    noResultsDiv = document.createElement('div');
+                    noResultsDiv.className = 'search-no-results';
+                    noResultsDiv.innerHTML = `
+                        <div class="search-no-results-icon">🔍</div>
+                        <div>找不到符合條件的餐廳</div>
+                        <div style="font-size: 13px; margin-top: 10px; opacity: 0.7;">
+                            試試調整搜尋詞或過濾條件
+                        </div>
+                    `;
+                    section.appendChild(noResultsDiv);
+                }
+            } else {
+                if (noResultsDiv) {
+                    noResultsDiv.remove();
+                }
+            }
+        }
+
+        // ==================== 分享功能 ====================
+
+        function openShareModal() {
+            const modal = document.getElementById('shareModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeShareModal() {
+            const modal = document.getElementById('shareModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+
+            // 隱藏預覽
+            document.getElementById('sharePreview').style.display = 'none';
+        }
+
+        // 關閉彈窗 - 點擊背景
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('shareModal');
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeShareModal();
+                }
+            });
+        });
+
+        // Web Share API（行動裝置優先）
+        async function shareViaWebAPI() {
+            const shareData = {
+                title: '北海道家庭旅遊指南 | 2025.10.11-10.18',
+                text: '8天7夜北海道家庭旅遊完整攻略，涵蓋札幌、小樽、函館等熱門景點、交通指南、美食推薦及行前準備。',
+                url: window.location.href
+            };
+
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                    showShareSuccess('分享成功！');
+                    closeShareModal();
+                } else {
+                    // 如果不支援 Web Share API，回退到複製連結
+                    await copyLink();
+                }
+            } catch (err) {
+                if (err.name !== 'AbortError') {
+                    console.error('分享失敗:', err);
+                    await copyLink();
+                }
+            }
+        }
+
+        // 複製連結
+        async function copyLink() {
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                showShareSuccess('連結已複製！');
+                closeShareModal();
+            } catch (err) {
+                console.error('複製失敗:', err);
+                // Fallback
+                fallbackCopyText(window.location.href);
+            }
+        }
+
+        // 生成旅遊摘要
+        function generateTravelSummary() {
+            return `🗾 北海道家庭旅遊指南
+📅 旅遊日期：2025.10.11 - 10.18（8天7夜）
+👨‍👩‍👧‍👦 人數：4人同行
+
+📍 主要城市路線
+• 新千歲機場 → 札幌（3晚）
+• 小樽（1日遊）
+• 函館（2晚）
+• 札幌 → 新千歲機場
+
+🏨 住宿安排
+• 札幌：Hotel Gracery Sapporo（3晚）
+• 函館：La Vista Hakodate Bay（2晚）
+• 札幌：札幌站前大和ROYNET飯店（2晚）
+
+🚃 交通票券
+• JR北海道鐵路周遊券（5日券）
+• Welcome Pass札幌地鐵1日券
+• 函館市電1日券
+
+🍜 必吃美食
+• 札幌：元祖拉麵橫丁、蟹將軍、海鮮丼
+• 小樽：政壽司、LeTAO芝士蛋糕
+• 函館：小丑漢堡、幸運小丑、村上海膽店
+
+🏛️ 必訪景點
+• 札幌：大通公園、狸小路、時計台
+• 小樽：運河、音樂盒館、北一硝子
+• 函館：函館山夜景、五稜郭、金森倉庫
+
+💰 預估預算（每人）
+• 機票：NT$ 15,000-20,000
+• 住宿：NT$ 12,000-15,000
+• 交通：NT$ 5,000-6,000
+• 餐飲：NT$ 10,000-12,000
+• 購物：NT$ 8,000-10,000
+────────────────────
+總計：NT$ 50,000-63,000/人
+
+🌐 網址：${window.location.href}
+
+✨ 用 Claude Code 製作的旅遊指南
+`;
+        }
+
+        // 複製旅遊摘要
+        async function copyTravelSummary() {
+            const summary = generateTravelSummary();
+
+            // 顯示預覽
+            document.getElementById('sharePreviewContent').textContent = summary;
+            document.getElementById('sharePreview').style.display = 'block';
+
+            try {
+                await navigator.clipboard.writeText(summary);
+                showShareSuccess('旅遊摘要已複製！');
+
+                setTimeout(() => {
+                    closeShareModal();
+                }, 1500);
+            } catch (err) {
+                console.error('複製失敗:', err);
+                fallbackCopyText(summary);
+            }
+        }
+
+        // 複製收藏清單
+        async function copyFavorites() {
+            const favorites = JSON.parse(localStorage.getItem('hokkaidoFavorites') || '{}');
+            const notes = JSON.parse(localStorage.getItem('hokkaidoNotes') || '{}');
+
+            if (Object.keys(favorites).length === 0) {
+                showShareSuccess('您還沒有收藏任何項目！', 'warning');
+                return;
+            }
+
+            let favoritesText = '⭐ 我的北海道旅遊收藏\n\n';
+
+            // 收集所有收藏項目的資訊
+            for (const itemId in favorites) {
+                const element = document.querySelector(`[data-item-id="${itemId}"]`);
+                if (element) {
+                    // 取得項目標題
+                    const titleElement = element.querySelector('h3, .restaurant-name, .day-title');
+                    const title = titleElement ? titleElement.textContent.trim() : itemId;
+
+                    favoritesText += `📍 ${title}\n`;
+
+                    // 如果有筆記，加入筆記內容
+                    if (notes[itemId]) {
+                        favoritesText += `   💭 ${notes[itemId]}\n`;
+                    }
+
+                    favoritesText += '\n';
+                }
+            }
+
+            favoritesText += `\n🌐 完整指南：${window.location.href}\n`;
+            favoritesText += `\n✨ 用 Claude Code 製作的旅遊指南`;
+
+            // 顯示預覽
+            document.getElementById('sharePreviewContent').textContent = favoritesText;
+            document.getElementById('sharePreview').style.display = 'block';
+
+            try {
+                await navigator.clipboard.writeText(favoritesText);
+                showShareSuccess('收藏清單已複製！');
+
+                setTimeout(() => {
+                    closeShareModal();
+                }, 1500);
+            } catch (err) {
+                console.error('複製失敗:', err);
+                fallbackCopyText(favoritesText);
+            }
+        }
+
+        // 顯示成功訊息
+        function showShareSuccess(message, type = 'success') {
+            const successDiv = document.getElementById('shareSuccess');
+            successDiv.textContent = type === 'success' ? `✓ ${message}` : `ℹ ${message}`;
+            successDiv.style.background = type === 'success' ? '#4ade80' : '#f8b500';
+            successDiv.classList.add('show');
+
+            setTimeout(() => {
+                successDiv.classList.remove('show');
+            }, 3000);
+        }
+
+        // Fallback 複製方法（舊版瀏覽器）
+        function fallbackCopyText(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showShareSuccess('已複製到剪貼簿！');
+                    setTimeout(() => {
+                        closeShareModal();
+                    }, 1500);
+                } else {
+                    showShareSuccess('複製失敗，請手動複製', 'warning');
+                }
+            } catch (err) {
+                console.error('Fallback 複製失敗:', err);
+                showShareSuccess('複製失敗，請手動複製', 'warning');
+            }
+
+            document.body.removeChild(textArea);
         }
     </script>
 </body>
